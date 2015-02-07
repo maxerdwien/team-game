@@ -19,7 +19,7 @@ var Resources = function() {
 	this.middle_sprite_sheet.src = "images/Middle v1.png";
 	
 	this.mana_sprite_sheet = new Image(1088, 64);
-	this.mana_sprite_sheet.src = "images/ManaBar v5.png";
+	this.mana_sprite_sheet.src = "images/ManaBar v6.png";
 	
 	this.intruder_alert = new Image(320, 320);
 	this.intruder_alert.src = "images/IntruderAlert v1.png";

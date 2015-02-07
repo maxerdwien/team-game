@@ -15,6 +15,10 @@ Mana_pool.prototype = {
 				((i+this.offset)%17)*64, 0, 64, 64,
 				i*64, 576, 64, 64);
 		}
+		for (i = this.remaining_mana; i < 20; i++) {
+			ctx.drawImage(resources.mana_sprite_sheet,
+				289, 0, 64, 64, i*64, 576, 64, 640);
+		}
 		ctx.restore();
 	},
 	

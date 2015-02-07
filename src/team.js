@@ -33,6 +33,13 @@ var Game = function (canvasId) {
 	this.pipeDream = new PipeDream(this);
 	this.masher = new Masher(this);
 	
+	this.mode = "Cutscene";
+	//Cutscene
+	//Pipes
+	//Towers
+	//Mashing
+	
+	
 	resources = new Resources();
 	
 	// tower pool
@@ -52,9 +59,11 @@ var Game = function (canvasId) {
 	
 	this.towers = [];
 	this.towers.push(new Bullet_tower(0,0));
-	this.towers.push(new Bullet_tower(0,0));
+	this.towers.push(new Laser_tower(0,0));
+	this.towers.push(new Zappy_tower(0,0));
 	this.tp.addTower(this.towers[0]);
 	this.tp.addTower(this.towers[1]);
+	this.tp.addTower(this.towers[2]);
 	
 	this.screen.onmousedown = function(e) { self.mousedown(e) };
 	this.screen.onmousemove = function(e) { self.mousemove(e) };
@@ -91,10 +100,6 @@ Game.prototype = {
 		this.backBufferContext.fillStyle="white";
 		this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		this.pipeDream.render(this.backBufferContext);
-		
-		this.tp.render(this.backBufferContext);
-		
 		this.mana.render(this.backBufferContext);
 		
 		this.level.render(this.backBufferContext);
@@ -103,9 +108,13 @@ Game.prototype = {
 			this.baddies[i].render(this.backBufferContext);
 		}
 		
+		this.tp.render(this.backBufferContext);
+		
 		for (var i = 0; i < this.towers.length; i++) {
 			this.towers[i].render(this.backBufferContext);
 		}
+		
+		this.pipeDream.render(this.backBufferContext);
 		
 		//this.masher.render(this.backBufferContext);
 		
@@ -142,7 +151,7 @@ Game.prototype = {
 	
 	mouseup: function(e) {
 		if (this.dragging != null) {
-			if (this.dragging.x > 640) {
+			if (this.dragging.x >= 640) {
 				this.dragging.mode = "deployed";
 			} else {
 				this.dragging.mode = "ready";

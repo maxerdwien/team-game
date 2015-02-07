@@ -29,4 +29,16 @@ var Resources = function() {
 	
 	this.hack_bar = new Image(64, 64);
 	this.hack_bar.src = "images/HackBar v1.png";
+	
+	this.zappy_sprite_sheet = new Image(792, 192);
+	this.zappy_sprite_sheet.src = "images/ZappyZap v1.png";
+	
+	this.screen1 = new Image (1280, 320);
+	this.screen1.src = "images/Screen1.png";
+	
+	this.screen2 = new Image (1280, 320);
+	this.screen2.src = "images/Screen2.png";
+	
+	this.screen3 = new Image (1280, 320);
+	this.screen3.src = "images/Screen3.png";
 }

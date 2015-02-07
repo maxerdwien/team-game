@@ -5,6 +5,7 @@ var TD_level = function() {
 	
 	this.spawn_waves = [
 		[1, 0],
+		[2, 0],
 		[8, 0],
 		[14, 0],
 		[19, 1],
@@ -94,6 +95,9 @@ TD_level.prototype = {
 					}
 					if (this.spawn_waves[this.spawn_index][i] == 1) {
 						newBaddie = new Worm(640, -64, this.path);
+					}
+					if (this.spawn_waves[this.spawn_index][i] == 2) {
+						newBaddie = new Trojan(640, -64, this.path);
 					}
 					
 					game.baddies.push(newBaddie);

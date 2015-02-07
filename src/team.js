@@ -5,6 +5,8 @@ var HEIGHT = 640;
 // Fixed time step of 1/60th a second
 var TIME_STEP = 1000/60;
 
+var resources;
+
 // Game class
 //----------------------------------
 var Game = function (canvasId) {
@@ -27,16 +29,16 @@ var Game = function (canvasId) {
 	
 	//Game stuff
 	this.pipeDream = new PipeDream(this);
-	
-	// load in sprite sheets
-	this.pipe_sprite_sheet = new Image(1152, 192);
-	this.pipe_sprite_sheet.src = "images/Pipes v2.png";
+
+	resources = new Resources();
 	
 	// add td stuff
-	this.baddies = [];
-	this.baddies.push(new Virus(672, 0));
-}
+	this.level = new TD_level();
 	
+	this.baddies = [];
+	this.baddies.push(new Virus(640, -64, this.level.path));
+}
+
 Game.prototype = {
 
 	// Update the game world.  See
@@ -49,12 +51,17 @@ Game.prototype = {
 	
 	render: function(elapsedTime) {
 		var self = this;
+
 		this.pipeDream.render(this.backBufferContext);
 		
-		/*for (var i = 0; i < this.baddies.length; i++) {
-			this.baddies[i].render(this.backBufferContext);
-		}*/
+		// doesn't work?
+		this.backBufferContext.clearRect(0, 0, WIDTH, HEIGHT);
 		
+		for (var i = 0; i < this.baddies.length; i++) {
+			this.baddies[i].render(this.backBufferContext);
+		}
+		
+		// Flip buffers
 		self.screenContext.drawImage(self.backBuffer, 0, 0);
 	},
 	

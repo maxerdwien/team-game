@@ -62,7 +62,7 @@ Bullet_tower.prototype.render = function(ctx) {
 	var x = this.x;
 	var y = this.y;
 	if (this.angle > 31*Math.PI/16 && this.angle < 32*Math.PI/16 ||
-		this.angle > 0*Math.PI/16 && this.angle <= 1*Math.PI/16) {
+		this.angle >= 0*Math.PI/16 && this.angle <= 1*Math.PI/16) {
 		this.spritex = 0;
 	}
 	if (this.angle > 1*Math.PI/16 && this.angle <= 3*Math.PI/16) {

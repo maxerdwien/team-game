@@ -73,12 +73,12 @@ straightePipe.prototype = {
 							this.height)
 		}
 		context.restore();
-	}
+	},
 	
 	update: function()
 	{
 		
-	}
+	},
 	
 	rotate: function()
 	{

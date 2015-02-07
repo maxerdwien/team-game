@@ -1,6 +1,6 @@
 // Screen Size
-var WIDTH = 800;
-var HEIGHT = 480;
+var WIDTH = 1280;
+var HEIGHT = 640;
 
 // Fixed time step of 1/60th a second
 var TIME_STEP = 1000/60;

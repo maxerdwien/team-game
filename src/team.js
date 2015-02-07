@@ -32,6 +32,9 @@ var Game = function (canvasId) {
 	// add td stuff
 	this.level = new TD_level();
 	
+	this.cd = new Collision_detector();
+	
+	// it is important for targeting priority that this array be sorted by spawn order
 	this.baddies = [];
 	this.baddies.push(new Virus(640, -64, this.level.path));
 	
@@ -56,8 +59,7 @@ Game.prototype = {
 	render: function(elapsedTime) {
 		var self = this;
 		
-		// doesn't work?
-		this.backBufferContext.clearRect(0, 0, WIDTH, HEIGHT);
+		this.level.render(this.backBufferContext);
 		
 		for (var i = 0; i < this.baddies.length; i++) {
 			this.baddies[i].render(this.backBufferContext);

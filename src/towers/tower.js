@@ -104,8 +104,6 @@ Tower.prototype = {
 			ctx.scale(-1,1);
 		}
 		
-		console.log(this.angle);
-		//ctx.scale(-1,-1);
 		ctx.drawImage(this.image, this.spritex, this.spritey, 64, 64,
 			this.x, this.y, 64, 64);
 		ctx.restore();

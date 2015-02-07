@@ -16,5 +16,15 @@ Baddie.prototype = {
 		ctx.drawImage(this.image, this.spritex, this.spritey, 64, 64,
 			this.x, this.y, 64, 64);
 		ctx.restore();
+	},
+	
+	getHitbox: function() {
+		return {
+			type: "rect",
+			x: this.x,
+			y: this.y,
+			w: 64,
+			h: 64
+		};
 	}
 }

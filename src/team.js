@@ -82,6 +82,7 @@ Game.prototype = {
 		}
 		else
 		{
+			this.pipeDream.update();
 			this.mana.update(elapsedTime);
 			
 			this.level.update(elapsedTime);
@@ -126,9 +127,10 @@ Game.prototype = {
 			}
 			
 			this.pipeDream.render(this.backBufferContext);
-			
-			//this.masher.render(this.backBufferContext);
 		}
+		
+		//this.masher.render(this.backBufferContext);
+		
 		// Flip buffers
 		self.screenContext.drawImage(self.backBuffer, 0, 0);
 	},

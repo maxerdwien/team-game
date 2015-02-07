@@ -41,4 +41,7 @@ var Resources = function() {
 	
 	this.screen3 = new Image (1280, 320);
 	this.screen3.src = "images/Screen3.png";
+
+	this.ranges_sprite_sheet = new Image(576, 256);
+	this.ranges_sprite_sheet.src = "images/Ranges v2.png";
 }

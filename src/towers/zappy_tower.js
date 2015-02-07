@@ -7,7 +7,7 @@ var Zappy_tower = function(x, y) {
 	this.spritey = 0;
 	
 	// damage per millisecond
-	this.damage = 0.1;
+	this.damage = 0.08;
 	
 	this.max_cannon_cooldown = 2700;
 	this.cannon_cooldown = this.max_cannon_cooldown;
@@ -70,6 +70,12 @@ Zappy_tower.prototype.update = function(elapsedTime) {
 }
 
 Zappy_tower.prototype.render = function(ctx) {
+	if (this.mode == "dragging") {
+		ctx.save();
+		ctx.drawImage(resources.ranges_sprite_sheet, 256, 0, 192, 192,
+			this.x+(32-96), this.y+(32-96), 192, 192);
+		ctx.restore();
+	}
 	this.spritex = 640;
 	if (this.firing) {
 		this.spritex += 64;

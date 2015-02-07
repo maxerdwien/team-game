@@ -159,13 +159,27 @@ Game.prototype = {
 		if (this.dragging != null) {
 			this.dragging.x = 64*Math.floor((this.mousex)/64);
 			this.dragging.y = 64*Math.floor((this.mousey)/64);
+			
 		}
 	},
 	
 	mouseup: function(e) {
 		if (this.dragging != null) {
-			if (this.dragging.x >= 640) {
-				this.dragging.mode = "deployed";
+			if (this.dragging.x >= 640 && this.dragging.y < 576) {
+				var restricted = false;
+				for (var i = 0; i < this.level.noBuildZones.length; i++) {
+					if (this.dragging.x == this.level.noBuildZones[i].x &&
+						this.dragging.y == this.level.noBuildZones[i].y) {
+						restricted = true;
+					}
+				}
+				if (restricted) {
+					this.dragging.mode = "ready";
+				} else {
+					this.dragging.mode = "deployed";
+					var newNoBuild = {x: this.dragging.x, y: this.dragging.y };
+					this.level.noBuildZones.push(newNoBuild);
+				}
 			} else {
 				this.dragging.mode = "ready";
 			}

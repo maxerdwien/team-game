@@ -2,12 +2,12 @@ var crossPipe = function(x, y, gx, gy, width, height, game)
 {
 	this.x = x;
 	this.y = y;
-	this.gridx = x;
-	this.gridy = y;
+	this.gridx = gx;
+	this.gridy = gy;
 	this.spritex = 0;
 	this.spritey = 64;
-	this.pipe1 = new straightPipe(x, y, gx, gy, width, height, game, false);
-	this.pipe2 = new straightPipe(x, y, gx, gy, width, height, game, false);
+	this.pipe1 = new straightPipe(x, y, gx, gy, width, height, game);
+	this.pipe2 = new straightPipe(x, y, gx, gy, width, height, game);
 	this.pipe1.spritey = this.spritey;
 	this.pipe2.spritey = this.spritey;
 	this.pipe2.rotate();

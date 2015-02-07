@@ -6,12 +6,14 @@ var startPipe = function(width, height, game)
 	this.gridy = 0;
 	this.spritex = 0;
 	this.spritey = 0;
-	this.dest = { x: this.x, y: this.y+1 };
+	this.doodadx = 0;
+	this.doodady = 192;
+	this.dest = { x: this.gridx, y: this.gridy+1 };
 	this.width = width;
 	this.height = height;
 	this.game = game;
 	this.dir = 0;
-	this.connected = false;
+	this.connected = true;
 }
 
 startPipe.prototype = {
@@ -26,7 +28,16 @@ startPipe.prototype = {
 						this.x,
 						this.y,
 						this.width,
-						this.height)
+						this.height);
+		context.drawImage(resources.pipes_sprite_sheet,
+						this.doodadx,
+						this.doodady,
+						this.width,
+						this.height,
+						this.x,
+						this.y,
+						this.width,
+						this.height);
 		context.restore();
 	},
 	
@@ -94,17 +105,7 @@ startPipe.prototype = {
 	
 	checkPath: function()
 	{
-		if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
-		{
-			this.connected = true;
-		}
-		else if(this.dest.x < game.pipeDream.gridWidth && this.dest.x >= 0 && this.dest.y < game.pipeDream.gridHeight && this.dest.y >= 0 && game.pipDream.pipeTiles[(this.dest.y * 9) + this.dest.x].connected == true)
-		{
-			if(this.dir == 0) setDir(3);
-			else if(this.dir == 1) setDir(2);
-			else if(this.dir == 2) setDir(1);
-			else if(this.dir == 3) setDir(0);
-		}
+		game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath();
 	},
 	
 }

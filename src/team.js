@@ -69,6 +69,8 @@ Game.prototype = {
 		this.mana.update(elapsedTime);
 		
 		this.level.update(elapsedTime);
+		this.pipeDream.render(this.backBufferContext);
+		this.pipeDream.update();
 		
 		for (var i = 0; i < this.towers.length; i++) {
 			this.towers[i].update(elapsedTime);

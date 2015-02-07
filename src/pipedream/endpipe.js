@@ -6,7 +6,8 @@ var endPipe = function(x, y, gx, gy, width, height, game)
 	this.gridy = gy;
 	this.spritex = 0;
 	this.spritey = 0;
-	this.source = { x: this.x, y: this.y+1 };
+	this.turret = new Bullet_tower(x, y);
+	this.source = { x: this.gridx, y: this.gridy+1 };
 	this.width = width;
 	this.height = height;
 	this.game = game;
@@ -18,18 +19,70 @@ endPipe.prototype = {
 	render: function(context)
 	{
 		context.save();
-		context.drawImage(resources.pipes_sprite_sheet,
-						this.spritex,
-						this.spritey,
-						this.width,
-						this.height,
-						this.x,
-						this.y,
-						this.width,
-						this.height)
-		context.fillStyle = "red";
-		context.fillRect(this.x, this.y, this.width, this.height);
+		if(this.test == true)
+		{
+			context.fillStyle = "blue";
+			context.fillRect(this.x, this.y, this.width, this.height);
+		}
+		if(this.dir == 0)
+		{
+			context.drawImage(resources.pipes_sprite_sheet,
+							this.spritex,
+							this.spritey,
+							this.width,
+							this.height/2,
+							this.x,
+							this.y,
+							this.width,
+							this.height/2)
+		}
+		else if(this.dir == 1)
+		{
+			context.translate(this.x, this.y);
+			context.rotate(-Math.PI/2);
+			context.translate(-this.width, 0);
+			context.drawImage(resources.pipes_sprite_sheet,
+							this.spritex,
+							this.spritey,
+							this.width,
+							this.height/2,
+							0,
+							0,
+							this.width,
+							this.height/2)
+		}
+		else if(this.dir == 2)
+		{
+			context.translate(this.x, this.y);
+			context.rotate(Math.PI/2);
+			context.translate(0, -this.height);
+			context.drawImage(resources.pipes_sprite_sheet,
+							this.spritex,
+							this.spritey,
+							this.width,
+							this.height/2,
+							0,
+							0,
+							this.width,
+							this.height/2)
+		}
+		else if(this.dir == 3)
+		{
+			context.translate(this.x, this.y);
+			context.rotate(Math.PI);
+			context.translate(-this.width, -this.height);
+			context.drawImage(resources.pipes_sprite_sheet,
+							this.spritex,
+							this.spritey,
+							this.width,
+							this.height/2,
+							0,
+							0,
+							this.width,
+							this.height/2)
+		}
 		context.restore();
+		this.turret.render(context);
 	},
 	
 	update: function()
@@ -69,43 +122,33 @@ endPipe.prototype = {
 	
 	setDir: function(set)
 	{
-		/*
+		
 		this.dir = set;
 		
 		if(this.dir == 0)
 		{
-			this.source = { x: this.x, y: this.y+1 };
-			this.dest = { x: this.x, y: this.y-1 };
+			this.source = { x: this.gridx, y: this.gridy-1 };
 		}
 		else if(this.dir == 1)
 		{
-			this.source = { x: this.x+1, y: this.y };
-			this.dest = { x: this.x-1, y: this.y };
+			this.source = { x: this.gridx-1, y: this.gridy };
 		}
 		else if(this.dir == 2)
 		{
-			this.source = { x: this.x-1, y: this.y };
-			this.dest = { x: this.x+1, y: this.y };
+			this.source = { x: this.gridx+1, y: this.gridy };
 		}
 		else if(this.dir == 3)
 		{
-			this.source = { x: this.x, y: this.y-1 };
-			this.dest = { x: this.x, y: this.y+1 };
-		}*/
+			this.source = { x: this.gridx, y: this.gridy+1 };
+		}
 	},
 	
 	checkPath: function()
 	{
-		if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
+		if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
 		{
 			this.connected = true;
-		}
-		else if(this.dest.x < game.pipeDream.gridWidth && this.dest.x >= 0 && this.dest.y < game.pipeDream.gridHeight && this.dest.y >= 0 && game.pipDream.pipeTiles[(this.dest.y * 9) + this.dest.x].connected == true)
-		{
-			if(this.dir == 0) setDir(3);
-			else if(this.dir == 1) setDir(2);
-			else if(this.dir == 2) setDir(1);
-			else if(this.dir == 3) setDir(0);
+			console.log("Connection Made");
 		}
 	},
 	

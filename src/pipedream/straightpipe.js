@@ -1,30 +1,24 @@
-var straightPipe = function(x, y, gx, gy, width, height, game, test)
+var straightPipe = function(x, y, gx, gy, width, height, game)
 {
 	this.x = x;
 	this.y = y;
-	this.gridx = x;
-	this.gridy = y;
+	this.gridx = gx;
+	this.gridy = gy;
 	this.spritex = 0;
 	this.spritey = 0;
-	this.source = { x: this.x, y: this.y+1 };
-	this.dest = { x: this.x, y: this.y-1 };
+	this.source = { x: this.gridx, y: this.gridy+1 };
+	this.dest = { x: this.gridx, y: this.gridy-1 };
 	this.width = width;
 	this.height = height;
 	this.game = game;
 	this.dir = 0;
 	this.connected = false;
-	this.test = test;
 }
 
 straightPipe.prototype = {
 	render: function(context)
 	{
 		context.save();
-		if(this.test == true)
-		{
-			context.fillStyle = "blue";
-			context.fillRect(this.x, this.y, this.width, this.height);
-		}
 		if(this.dir == 0)
 		{
 			context.drawImage(resources.pipes_sprite_sheet,
@@ -97,23 +91,23 @@ straightPipe.prototype = {
 		
 		if(this.dir == 0)
 		{
-			this.source = { x: this.x, y: this.y+1 };
-			this.dest = { x: this.x, y: this.y-1 };
+			this.source = { x: this.gridx, y: this.gridy+1 };
+			this.dest = { x: this.gridx, y: this.gridy-1 };
 		}
 		else if(this.dir == 1)
 		{
-			this.source = { x: this.x+1, y: this.y };
-			this.dest = { x: this.x-1, y: this.y };
+			this.source = { x: this.gridx+1, y: this.gridy };
+			this.dest = { x: this.gridx-1, y: this.gridy };
 		}
 		else if(this.dir == 2)
 		{
-			this.source = { x: this.x-1, y: this.y };
-			this.dest = { x: this.x+1, y: this.y };
+			this.source = { x: this.gridx-1, y: this.gridy };
+			this.dest = { x: this.gridx+1, y: this.gridy };
 		}
 		else if(this.dir == 3)
 		{
-			this.source = { x: this.x, y: this.y-1 };
-			this.dest = { x: this.x, y: this.y+1 };
+			this.source = { x: this.gridx, y: this.gridy-1 };
+			this.dest = { x: this.gridx, y: this.gridy+1 };
 		}
 		//this.checkPath();
 	},
@@ -124,23 +118,23 @@ straightPipe.prototype = {
 		
 		if(this.dir == 0)
 		{
-			this.source = { x: this.x, y: this.y+1 };
-			this.dest = { x: this.x, y: this.y-1 };
+			this.source = { x: this.gridx, y: this.gridy+1 };
+			this.dest = { x: this.gridx, y: this.gridy-1 };
 		}
 		else if(this.dir == 1)
 		{
-			this.source = { x: this.x+1, y: this.y };
-			this.dest = { x: this.x-1, y: this.y };
+			this.source = { x: this.gridx+1, y: this.gridy };
+			this.dest = { x: this.gridx-1, y: this.gridy };
 		}
 		else if(this.dir == 2)
 		{
-			this.source = { x: this.x-1, y: this.y };
-			this.dest = { x: this.x+1, y: this.y };
+			this.source = { x: this.gridx-1, y: this.gridy };
+			this.dest = { x: this.gridx+1, y: this.gridy };
 		}
 		else if(this.dir == 3)
 		{
-			this.source = { x: this.x, y: this.y-1 };
-			this.dest = { x: this.x, y: this.y+1 };
+			this.source = { x: this.gridx, y: this.gridy-1 };
+			this.dest = { x: this.gridx, y: this.gridy+1 };
 		}
 	},
 	
@@ -156,6 +150,11 @@ straightPipe.prototype = {
 			else if(this.dir == 1) setDir(2);
 			else if(this.dir == 2) setDir(1);
 			else if(this.dir == 3) setDir(0);
+			this.connected = true;
+		}
+		if(this.connected == true)
+		{
+			game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath();
 		}
 	},
 	

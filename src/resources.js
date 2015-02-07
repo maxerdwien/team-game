@@ -14,4 +14,10 @@ var Resources = function() {
 	
 	this.hex_sprite_sheet = new Image(512, 32);
 	this.hex_sprite_sheet.src = "images/Hex v2.png";
+	
+	this.middle_sprite_sheet = new Image(960, 64);
+	this.middle_sprite_sheet.src = "images/Middle v1.png";
+	
+	this.mana_sprite_sheet = new Image(1088, 64);
+	this.mana_sprite_sheet.src = "images/ManaBar v5.png";
 }

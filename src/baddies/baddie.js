@@ -11,12 +11,6 @@ var Baddie = function() {
 }
 
 Baddie.prototype = {
-	render: function(ctx) {
-		ctx.save();
-		ctx.drawImage(this.image, this.spritex, this.spritey, 64, 64,
-			this.x, this.y, 64, 64);
-		ctx.restore();
-	},
 	
 	getHitbox: function() {
 		return {
@@ -26,5 +20,9 @@ Baddie.prototype = {
 			w: 64,
 			h: 64
 		};
+	},
+	
+	attackCPU: function() {
+		game.mana.remaining_mana -= this.attack;
 	}
 }

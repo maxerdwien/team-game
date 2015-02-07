@@ -24,6 +24,14 @@ var Game = function (canvasId) {
 	this.lastTime = 0;
 	this.gameTime = 0;
 	this.STARTING_FPS = 60;
+	
+	// load in sprite sheets
+	this.pipe_sprite_sheet = new Image(288, 48);
+	this.pipe_sprite_sheet.src = "images/Pipes v1.png";
+	
+	// add td stuff
+	this.baddies = [];
+	this.baddies.push(new Virus(672, 0));
 }
 	
 Game.prototype = {
@@ -31,11 +39,27 @@ Game.prototype = {
 	// Update the game world.  See
 	// http://gameprogrammingpatterns.com/update-method.html
 	update: function(elapsedTime) {
-		
+		for (var i = 0; i < this.baddies.length; i++) {
+			this.baddies[i].update(elapsedTime);
+		}
 	},
 	
 	render: function(elapsedTime) {
+		for (var i = 0; i < this.baddies.length; i++) {
+			this.baddies[i].render(this.backBufferContext);
+		}
+	},
+	
+	start: function() {
+		var self = this;
 		
+		this.startTime = Date.now();
+		
+		window.requestNextAnimationFrame(
+			function(time) {
+				self.loop.call(self, time);
+			}
+		);
 	},
 	
 	// The game loop.  See
@@ -77,3 +101,4 @@ Game.prototype = {
 	}
 }
 var game = new Game('game');
+game.start();

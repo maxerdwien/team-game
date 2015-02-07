@@ -8,10 +8,6 @@ var Tower = function() {
 }
 
 Tower.prototype = {
-	update: function(elapsedTime) {
-		
-	},
-	
 	render: function(ctx) {
 		ctx.save();
 		ctx.drawImage(this.image, this.spritex, this.spritey, 16, 16,

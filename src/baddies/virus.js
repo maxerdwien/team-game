@@ -13,6 +13,9 @@ var Virus = function(x, y, path) {
 	this.speed = 0.1;
 	
 	this.distance_traveled = 0;
+	
+	this.max_health = 100;
+	this.health = this.max_health;
 }
 
 Virus.prototype = new Baddie();

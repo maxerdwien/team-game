@@ -27,6 +27,14 @@ var Game = function (canvasId) {
 	
 	//Game stuff
 	this.pipeDream = new PipeDream(this);
+	
+	// load in sprite sheets
+	this.pipe_sprite_sheet = new Image(288, 48);
+	this.pipe_sprite_sheet.src = "images/Pipes v1.png";
+	
+	// add td stuff
+	this.baddies = [];
+	this.baddies.push(new Virus(672, 0));
 }
 	
 Game.prototype = {
@@ -34,13 +42,30 @@ Game.prototype = {
 	// Update the game world.  See
 	// http://gameprogrammingpatterns.com/update-method.html
 	update: function(elapsedTime) {
-		
+		for (var i = 0; i < this.baddies.length; i++) {
+			this.baddies[i].update(elapsedTime);
+		}
 	},
 	
 	render: function(elapsedTime) {
 		var self = this;
 		this.pipeDream.render(this.backBufferContext);
+		for (var i = 0; i < this.baddies.length; i++) {
+			this.baddies[i].render(this.backBufferContext);
+		}
 		self.screenContext.drawImage(self.backBuffer, 0, 0);
+	},
+	
+	start: function() {
+		var self = this;
+		
+		this.startTime = Date.now();
+		
+		window.requestNextAnimationFrame(
+			function(time) {
+				self.loop.call(self, time);
+			}
+		);
 	},
 	
 	// The game loop.  See
@@ -82,3 +107,4 @@ Game.prototype = {
 	}
 }
 var game = new Game('game');
+game.start();

@@ -29,8 +29,8 @@ var Game = function (canvasId) {
 	this.pipeDream = new PipeDream(this);
 	
 	// load in sprite sheets
-	this.pipe_sprite_sheet = new Image(288, 48);
-	this.pipe_sprite_sheet.src = "images/Pipes v1.png";
+	this.pipe_sprite_sheet = new Image(1152, 192);
+	this.pipe_sprite_sheet.src = "images/Pipes v2.png";
 	
 	// add td stuff
 	this.baddies = [];

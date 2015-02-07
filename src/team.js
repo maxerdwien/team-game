@@ -90,7 +90,7 @@ Game.prototype = {
 			this.towers[i].render(this.backBufferContext);
 		}
 		
-		this.masher.render(this.backBufferContext);
+		//this.masher.render(this.backBufferContext);
 		
 		// Flip buffers
 		self.screenContext.drawImage(self.backBuffer, 0, 0);

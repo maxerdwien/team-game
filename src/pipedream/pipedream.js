@@ -34,7 +34,10 @@ PipeDream.prototype = {
 		{
 			for(var j = 0; j < this.gridWidth; j++)
 			{
-				this.pipeTiles.push(new pipeTile(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game));
+				var rng = Math.floor(Math.random() * 3);
+				if(rng == 0) this.pipeTiles.push(new straightPipe(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game));
+				else if(rng == 1) this.pipeTiles.push(new curvePipe(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game));
+				else if(rng == 2) this.pipeTiles.push(new crossPipe(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game));
 			}
 		}
 	}

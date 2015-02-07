@@ -33,6 +33,13 @@ var Game = function (canvasId) {
 	this.pipeDream = new PipeDream(this);
 	this.masher = new Masher(this);
 	
+	this.mode = "Cutscene";
+	//Cutscene
+	//Pipes
+	//Towers
+	//Mashing
+	
+	
 	resources = new Resources();
 	
 	// tower pool

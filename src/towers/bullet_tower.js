@@ -8,11 +8,15 @@ var Bullet_tower = function(x, y) {
 	
 	this.angle = 0;
 	
-	this.damage = 10;
+	this.damage = 15;
 	
 	this.max_cannon_cooldown = 600;
 	this.cannon_cooldown = this.max_cannon_cooldown;
 	this.cannon_ready = false;
+	
+	this.max_firing_cooldown = 75;
+	this.firing_cooldown = this.max_firing_cooldown;
+	this.firing = false;
 }
 
 Bullet_tower.prototype = new Tower();
@@ -25,13 +29,24 @@ Bullet_tower.prototype.update = function(elapsedTime) {
 			this.cannon_cooldown = this.max_cannon_cooldown;
 		}
 	}
+	if (this.firing) {
+		this.firing_cooldown -= elapsedTime;
+		if (this.firing_cooldown <= 0) {
+			this.firing_cooldown = this.max_firing_cooldown;
+			this.firing = false;
+		}
+	}
 	
 	for (var i = 0; i < game.baddies.length; i++) {
 		if (this.cannon_ready &&
 			game.cd.detect(this.getRange(), game.baddies[i].getHitbox())) {
 			this.pointAt(game.baddies[i]);
-			game.baddies[i].health -= this.damage;
+			game.baddies[i].hurt(this.damage);
 			this.cannon_ready = false;
+			this.firing = true;
+			if (game.baddies[i].health <= 0) {
+				game.baddies.splice(i, 1);
+			}
 			break;
 		}
 	}
@@ -39,8 +54,113 @@ Bullet_tower.prototype.update = function(elapsedTime) {
 		this.angle -= 2*Math.PI;
 	}
 	if (this.angle < 0) {
-		this.angle += Math.PI;
+		this.angle += 2*Math.PI;
 	}
+}
+
+Bullet_tower.prototype.render = function(ctx) {
+	ctx.save();
+	var x = this.x;
+	var y = this.y;
+	//ctx.translate(WIDTH,HEIGHT);
+	if (this.angle > 31*Math.PI/16 && this.angle < 32*Math.PI/16 ||
+		this.angle > 0*Math.PI/16 && this.angle <= 1*Math.PI/16) {
+		this.spritex = 0;
+	}
+	if (this.angle > 1*Math.PI/16 && this.angle <= 3*Math.PI/16) {
+		this.spritex = 128;
+	}
+	if (this.angle > 3*Math.PI/16 && this.angle <= 5*Math.PI/16) {
+		this.spritex = 256;
+	}
+	if (this.angle > 5*Math.PI/16 && this.angle <= 7*Math.PI/16) {
+		this.spritex = 128;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(Math.PI/2);
+		ctx.translate(this.x+64, -this.y-64);
+		ctx.scale(-1,1);
+	}
+	if (this.angle > 7*Math.PI/16 && this.angle <= 9*Math.PI/16) {
+		this.spritex = 0;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(Math.PI/2);
+		ctx.translate(-this.x, -this.y-64);
+	}
+	if (this.angle > 9*Math.PI/16 && this.angle <= 11*Math.PI/16) {
+		this.spritex = 128;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(Math.PI/2);
+		ctx.translate(-this.x, -this.y-64);
+	}
+	if (this.angle > 11*Math.PI/16 && this.angle <= 13*Math.PI/16) {
+		this.spritex = 256;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(Math.PI/2);
+		ctx.translate(-this.x, -this.y-64);
+	}
+	if (this.angle > 13*Math.PI/16 && this.angle <= 15*Math.PI/16) {
+		this.spritex = 128;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(Math.PI);
+		ctx.translate(this.x, -this.y-64);
+		ctx.scale(-1,1);
+	}
+	if (this.angle > 15*Math.PI/16 && this.angle <= 17*Math.PI/16) {
+		this.spritex = 0;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(Math.PI);
+		ctx.translate(-this.x-64, -this.y-64);
+	}
+	if (this.angle > 17*Math.PI/16 && this.angle <= 19*Math.PI/16) {
+		this.spritex = 128;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(Math.PI);
+		ctx.translate(-this.x-64, -this.y-64);
+	}
+	if (this.angle > 19*Math.PI/16 && this.angle <= 21*Math.PI/16) {
+		this.spritex = 256;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(Math.PI);
+		ctx.translate(-this.x-64, -this.y-64);
+	}
+	if (this.angle > 21*Math.PI/16 && this.angle <= 23*Math.PI/16) {
+		this.spritex = 128;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(3*Math.PI/2);
+		ctx.translate(this.x, -this.y);
+		ctx.scale(-1,1);
+	}
+	if (this.angle > 23*Math.PI/16 && this.angle <= 25*Math.PI/16) {
+		this.spritex = 0;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(3*Math.PI/2);
+		ctx.translate(-this.x-64, -this.y);
+	}
+	if (this.angle > 25*Math.PI/16 && this.angle <= 27*Math.PI/16) {
+		this.spritex = 128;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(3*Math.PI/2);
+		ctx.translate(-this.x-64, -this.y);
+	}
+	if (this.angle > 27*Math.PI/16 && this.angle <= 29*Math.PI/16) {
+		this.spritex = 256;
+		ctx.translate(this.x, this.y);
+		ctx.rotate(3*Math.PI/2);
+		ctx.translate(-this.x-64, -this.y);
+	}
+	if (this.angle > 29*Math.PI/16 && this.angle <= 31*Math.PI/16) {
+		this.spritex = 128;
+		ctx.translate(2*this.x+64, 0);
+		ctx.scale(-1,1);
+	}
+	
+	if (this.firing) {
+		this.spritex += 64;
+	}
+	
+	ctx.drawImage(this.image, this.spritex, this.spritey, 64, 64,
+		this.x, this.y, 64, 64);
+	ctx.restore();
 }
 
 Bullet_tower.prototype.getRange = function() {
@@ -58,4 +178,7 @@ Bullet_tower.prototype.pointAt = function(b) {
 	var deltay = this.y - b.y;
 	
 	this.angle = Math.atan(-deltax/deltay);
+	if (deltay < 0) {
+		this.angle += Math.PI;
+	}
 }

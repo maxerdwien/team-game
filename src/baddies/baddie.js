@@ -20,5 +20,9 @@ Baddie.prototype = {
 			w: 64,
 			h: 64
 		};
+	},
+	
+	attackCPU: function() {
+		game.mana.remaining_mana -= this.attack;
 	}
 }

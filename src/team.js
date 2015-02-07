@@ -32,6 +32,11 @@ var Game = function (canvasId) {
 
 	resources = new Resources();
 	
+	// tower pool
+	this.tp = new Tower_pool();
+	
+	this.mana = new Mana_pool();
+	
 	// add td stuff
 	this.level = new TD_level();
 	
@@ -51,6 +56,8 @@ Game.prototype = {
 	// Update the game world.  See
 	// http://gameprogrammingpatterns.com/update-method.html
 	update: function(elapsedTime) {
+		this.mana.update(elapsedTime);
+		
 		for (var i = 0; i < this.baddies.length; i++) {
 			this.baddies[i].update(elapsedTime);
 		}
@@ -67,6 +74,10 @@ Game.prototype = {
 		this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		this.pipeDream.render(this.backBufferContext);
+		
+		this.tp.render(this.backBufferContext);
+		
+		this.mana.render(this.backBufferContext);
 		
 		this.level.render(this.backBufferContext);
 		

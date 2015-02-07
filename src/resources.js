@@ -11,4 +11,10 @@ var Resources = function() {
 	
 	this.tower_defense_sprite_sheet = new Image(768, 64);
 	this.tower_defense_sprite_sheet.src = "images/TowerDefense v3.png";
+	
+	this.middle_sprite_sheet = new Image(960, 64);
+	this.middle_sprite_sheet.src = "images/Middle v1.png";
+	
+	this.mana_sprite_sheet = new Image(1088, 64);
+	this.mana_sprite_sheet.src = "images/ManaBar v5.png";
 }

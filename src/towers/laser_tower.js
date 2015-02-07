@@ -9,7 +9,7 @@ var Laser_tower = function(x, y) {
 	// always either 0, pi/2, pi, or 3pi/2
 	this.angle = 0;
 	
-	this.damage = 25;
+	this.damage = 10;
 	
 	this.max_cannon_cooldown = 800;
 	this.cannon_cooldown = this.max_cannon_cooldown;
@@ -79,6 +79,41 @@ Laser_tower.prototype.update = function(elapsedTime) {
 }
 
 Laser_tower.prototype.render = function(ctx) {
+	if (this.mode == "dragging") {
+		ctx.save();
+		ctx.drawImage(resources.ranges_sprite_sheet, 448, 0, 64, 64,
+			this.x, this.y, 64, 64);
+		for (var i = 0; i < 10; i++) {
+			ctx.drawImage(resources.ranges_sprite_sheet, 512, 0, 64, 64,
+				this.x, this.y-64*i, 64, 64);
+		}
+		
+		ctx.translate(this.x+32, this.y+32);
+		ctx.rotate(Math.PI/2);
+		ctx.translate(-(this.x+32), -(this.y+32));
+		for (var i = 0; i < 10; i++) {
+			ctx.drawImage(resources.ranges_sprite_sheet, 512, 0, 64, 64,
+				this.x, this.y-64*i, 64, 64);
+		}
+		
+		ctx.translate(this.x+32, this.y+32);
+		ctx.rotate(Math.PI/2);
+		ctx.translate(-(this.x+32), -(this.y+32));
+		for (var i = 0; i < 10; i++) {
+			ctx.drawImage(resources.ranges_sprite_sheet, 512, 0, 64, 64,
+				this.x, this.y-64*i, 64, 64);
+		}
+		
+		ctx.translate(this.x+32, this.y+32);
+		ctx.rotate(Math.PI/2);
+		ctx.translate(-(this.x+32), -(this.y+32));
+		for (var i = 0; i < 10; i++) {
+			ctx.drawImage(resources.ranges_sprite_sheet, 512, 0, 64, 64,
+				this.x, this.y-64*i, 64, 64);
+		}
+		
+		ctx.restore();
+	}
 	this.spritex = 384;
 	if (this.firing) {
 		this.spritex += 64;

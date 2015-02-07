@@ -23,4 +23,7 @@ var Resources = function() {
 	
 	this.zappy_sprite_sheet = new Image(792, 192);
 	this.zappy_sprite_sheet.src = "images/ZappyZap v1.png";
+	
+	this.ranges_sprite_sheet = new Image(576, 256);
+	this.ranges_sprite_sheet.src = "images/Ranges v1.png";
 }

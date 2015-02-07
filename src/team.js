@@ -91,8 +91,6 @@ Game.prototype = {
 		this.backBufferContext.fillStyle="white";
 		this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		this.mana.render(this.backBufferContext);
-		
 		this.level.render(this.backBufferContext);
 		
 		for (var i = 0; i < this.baddies.length; i++) {
@@ -104,6 +102,8 @@ Game.prototype = {
 		for (var i = 0; i < this.towers.length; i++) {
 			this.towers[i].render(this.backBufferContext);
 		}
+		
+		this.mana.render(this.backBufferContext);
 		
 		this.pipeDream.render(this.backBufferContext);
 		

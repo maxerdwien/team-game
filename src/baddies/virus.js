@@ -1,15 +1,11 @@
 var Virus = function(x, y, path) {
 	this.x = x;
 	this.y = y;
-	
-<<<<<<< HEAD
-	//this.image = game.pipes_sprite_sheet;
-=======
+
 	this.path = path;
 	this.path_index = 0;
 	
 	this.image = resources.pipes_sprite_sheet;
->>>>>>> origin/master
 	this.spritex = 0;
 	this.spritey = 0;
 	

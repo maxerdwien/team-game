@@ -8,4 +8,5 @@ var Resources = function() {
 	
 	this.towers_sprite_sheet = new Image(512, 64);
 	this.towers_sprite_sheet.src = "images/Towers v3.png";
+	console.log(this.towers_sprite_sheet);
 }

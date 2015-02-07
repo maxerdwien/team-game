@@ -29,4 +29,7 @@ var Resources = function() {
 	
 	this.hack_bar = new Image(64, 64);
 	this.hack_bar.src = "images/HackBar v1.png";
+	
+	this.zappy_sprite_sheet = new Image(792, 192);
+	this.zappy_sprite_sheet.src = "images/ZappyZap v1.png";
 }

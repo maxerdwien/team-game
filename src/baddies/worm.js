@@ -92,4 +92,7 @@ Worm.prototype.hurt = function(damage) {
 	if (this.health < this.max_health/3) {
 		this.damage_level = 1;
 	}
+	if (this.health <= 0) {
+		this.dead = true;
+	}
 }

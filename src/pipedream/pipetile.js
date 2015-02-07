@@ -1,4 +1,4 @@
-var pipeTile = function(x, y, gx, gy width, height, game)
+var pipeTile = function(x, y, gx, gy, width, height, game)
 {
 	this.x = x;
 	this.y = y;
@@ -14,9 +14,9 @@ pipeTile.prototype = {
 	render: function(context)
 	{
 		context.save();
-		context.fillStyle="white"
-		context.fillRect(x, y, this.width, this.height);
-		context.clearRect(x+4, y+4, this.width-4, this.height-4);
+		context.fillStyle="black"
+		context.fillRect(this.x, this.y, this.width, this.height);
+		context.clearRect(this.x+4, this.y+4, this.width-9, this.height-9);
 		context.restore();
 	},
 	

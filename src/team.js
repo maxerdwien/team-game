@@ -63,6 +63,9 @@ Game.prototype = {
 		
 		this.startTime = Date.now();
 		
+		//initialize pipeDream for testing.
+		this.pipeDream.init();
+		
 		window.requestNextAnimationFrame(
 			function(time) {
 				self.loop.call(self, time);

@@ -17,45 +17,43 @@ var Bullet_tower = function(x, y) {
 	this.max_firing_cooldown = 75;
 	this.firing_cooldown = this.max_firing_cooldown;
 	this.firing = false;
+	
+	this.mode = "ready";
 }
 
 Bullet_tower.prototype = new Tower();
 
 Bullet_tower.prototype.update = function(elapsedTime) {
-	if (!this.cannon_ready) {
-		this.cannon_cooldown -= elapsedTime;
-		if (this.cannon_cooldown <= 0) {
-			this.cannon_ready = true;
-			this.cannon_cooldown = this.max_cannon_cooldown;
-		}
-	}
-	if (this.firing) {
-		this.firing_cooldown -= elapsedTime;
-		if (this.firing_cooldown <= 0) {
-			this.firing_cooldown = this.max_firing_cooldown;
-			this.firing = false;
-		}
-	}
-	
-	for (var i = 0; i < game.baddies.length; i++) {
-		if (this.cannon_ready &&
-			game.cd.detect(this.getRange(), game.baddies[i].getHitbox())) {
-			this.pointAt(game.baddies[i]);
-			game.baddies[i].hurt(this.damage);
-			this.cannon_ready = false;
-			this.firing = true;
-			if (game.baddies[i].health <= 0) {
-				//game.baddies.splice(i, 1);
-				game.baddies[i].dead = true;
+	if (this.mode == "deployed") {
+		if (!this.cannon_ready) {
+			this.cannon_cooldown -= elapsedTime;
+			if (this.cannon_cooldown <= 0) {
+				this.cannon_ready = true;
+				this.cannon_cooldown = this.max_cannon_cooldown;
 			}
-			break;
 		}
-	}
-	if (this.angle >= 2*Math.PI) {
-		this.angle -= 2*Math.PI;
-	}
-	if (this.angle < 0) {
-		this.angle += 2*Math.PI;
+		if (this.firing) {
+			this.firing_cooldown -= elapsedTime;
+			if (this.firing_cooldown <= 0) {
+				this.firing_cooldown = this.max_firing_cooldown;
+				this.firing = false;
+			}
+		}
+		
+		for (var i = 0; i < game.baddies.length; i++) {
+			if (this.cannon_ready &&
+				game.cd.detect(this.getRange(), game.baddies[i].getHitbox())) {
+				this.pointAt(game.baddies[i]);
+				game.baddies[i].hurt(this.damage);
+				this.cannon_ready = false;
+				this.firing = true;
+				if (game.baddies[i].health <= 0) {
+					//game.baddies.splice(i, 1);
+					game.baddies[i].dead = true;
+				}
+				break;
+			}
+		}
 	}
 }
 
@@ -180,5 +178,11 @@ Bullet_tower.prototype.pointAt = function(b) {
 	this.angle = Math.atan(-deltax/deltay);
 	if (deltay < 0) {
 		this.angle += Math.PI;
+	}
+	if (this.angle >= 2*Math.PI) {
+		this.angle -= 2*Math.PI;
+	}
+	if (this.angle < 0) {
+		this.angle += 2*Math.PI;
 	}
 }

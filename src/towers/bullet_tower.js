@@ -186,3 +186,13 @@ Bullet_tower.prototype.pointAt = function(b) {
 		this.angle += 2*Math.PI;
 	}
 }
+
+Bullet_tower.prototype.getHitbox = function() {
+	return {
+		type: "rect",
+		x: this.x,
+		y: this.y,
+		w: 64,
+		h: 64
+	};
+}

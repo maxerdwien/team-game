@@ -20,5 +20,17 @@ Tower_pool.prototype = {
 		tower.x = 576;
 		tower.y = 512 - this.pool.length*64;
 		this.pool.push(tower);
+	},
+	
+	consolidate: function() {
+		for (var i = 0; i < this.pool.length; i++) {
+			if (this.pool[i].mode != "ready") {
+				this.pool.splice(i, 1);
+				i--;
+			} else {
+				this.pool[i].x = 576;
+				this.pool[i].y = 512 - i*64;
+			}
+		}
 	}
 }

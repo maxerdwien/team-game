@@ -10,7 +10,7 @@ var resources;
 // Game class
 //----------------------------------
 var Game = function (canvasId) {
-	var myself = this;
+	var self = this;
 
 	// Rendering variables
 	this.screen = document.getElementById(canvasId);
@@ -26,6 +26,8 @@ var Game = function (canvasId) {
 	this.lastTime = 0;
 	this.gameTime = 0;
 	this.STARTING_FPS = 60;
+	
+	this.dragging = null;
 	
 	//Game stuff
 	this.pipeDream = new PipeDream(this);
@@ -53,6 +55,10 @@ var Game = function (canvasId) {
 	this.towers.push(new Bullet_tower(0,0));
 	this.tp.addTower(this.towers[0]);
 	this.tp.addTower(this.towers[1]);
+	
+	this.screen.onmousedown = function(e) { self.mousedown(e) };
+	this.screen.onmousemove = function(e) { self.mousemove(e) };
+	this.screen.onmouseup = function(e) { self.mouseup(e) };
 }
 
 Game.prototype = {
@@ -103,6 +109,45 @@ Game.prototype = {
 		
 		// Flip buffers
 		self.screenContext.drawImage(self.backBuffer, 0, 0);
+	},
+	
+	mousedown: function(e) {
+		var mouseHitbox = {
+			type: "circle",
+			x: this.mousex,
+			y: this.mousey,
+			r: 0
+		};
+		for (var i = 0; i < this.towers.length; i++) {
+			if (this.towers[i].mode == "ready" &&
+				this.cd.detect(mouseHitbox, this.towers[i].getHitbox())) {
+				this.towers[i].mode = "dragging";
+				this.dragging = this.towers[i];
+			}
+		}
+	},
+	
+	mousemove: function(e) {
+		var rect = this.screen.getBoundingClientRect();
+		this.mousex = e.clientX - rect.left;
+		this.mousey = e.clientY - rect.top;
+		
+		if (this.dragging != null) {
+			this.dragging.x = 64*Math.floor((this.mousex)/64);
+			this.dragging.y = 64*Math.floor((this.mousey)/64);
+		}
+	},
+	
+	mouseup: function(e) {
+		if (this.dragging != null) {
+			if (this.dragging.x > 640) {
+				this.dragging.mode = "deployed";
+			} else {
+				this.dragging.mode = "ready";
+			}
+			this.tp.consolidate();
+		}
+		this.dragging = null;
 	},
 	
 	start: function() {

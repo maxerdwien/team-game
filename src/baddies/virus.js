@@ -91,4 +91,7 @@ Virus.prototype.hurt = function(damage) {
 		this.spritex += 128;
 		this.damage_level++;
 	}
+	if (this.health <= 0) {
+		this.dead = true;
+	}
 }

@@ -12,7 +12,7 @@ var Bullet_tower = function(x, y) {
 	
 	this.max_cannon_cooldown = 600;
 	this.cannon_cooldown = this.max_cannon_cooldown;
-	this.cannon_ready = false;
+	this.cannon_ready = true;
 	
 	this.max_firing_cooldown = 75;
 	this.firing_cooldown = this.max_firing_cooldown;
@@ -47,10 +47,6 @@ Bullet_tower.prototype.update = function(elapsedTime) {
 				game.baddies[i].hurt(this.damage);
 				this.cannon_ready = false;
 				this.firing = true;
-				if (game.baddies[i].health <= 0) {
-					//game.baddies.splice(i, 1);
-					game.baddies[i].dead = true;
-				}
 				break;
 			}
 		}

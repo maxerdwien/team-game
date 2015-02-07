@@ -6,6 +6,7 @@ var Baddie = function() {
 	this.spritex;
 	this.spritey;
 	
+	this.health;
 }
 
 Baddie.prototype = {

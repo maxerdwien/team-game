@@ -5,7 +5,7 @@ var Virus = function(x, y, path) {
 	this.path = path;
 	this.path_index = 0;
 	
-	this.image = resources.pipes_sprite_sheet;
+	this.image = resources.enemies_sprite_sheet;
 	this.spritex = 0;
 	this.spritey = 0;
 	

@@ -14,7 +14,7 @@ var straightPipe = function(x, y, gx, gy, width, height, game)
 	this.dir = 0;
 }
 
-straightePipe.prototype = {
+straightPipe.prototype = {
 	render: function(context)
 	{
 		context.save();

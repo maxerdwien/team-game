@@ -29,7 +29,8 @@ var Game = function (canvasId) {
 	
 	//Game stuff
 	this.pipeDream = new PipeDream(this);
-
+	this.masher = new Masher(this);
+	
 	resources = new Resources();
 	
 	// add td stuff
@@ -76,6 +77,8 @@ Game.prototype = {
 		for (var i = 0; i < this.towers.length; i++) {
 			this.towers[i].render(this.backBufferContext);
 		}
+		
+		this.masher.render(this.backBufferContext);
 		
 		// Flip buffers
 		self.screenContext.drawImage(self.backBuffer, 0, 0);

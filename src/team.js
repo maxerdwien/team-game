@@ -51,11 +51,12 @@ Game.prototype = {
 	
 	render: function(elapsedTime) {
 		var self = this;
-
-		this.pipeDream.render(this.backBufferContext);
 		
 		// doesn't work?
-		this.backBufferContext.clearRect(0, 0, WIDTH, HEIGHT);
+		this.backBufferContext.fillStyle="white";
+		this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		this.pipeDream.render(this.backBufferContext);
 		
 		for (var i = 0; i < this.baddies.length; i++) {
 			this.baddies[i].render(this.backBufferContext);

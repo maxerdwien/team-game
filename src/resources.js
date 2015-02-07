@@ -20,4 +20,7 @@ var Resources = function() {
 	
 	this.mana_sprite_sheet = new Image(1088, 64);
 	this.mana_sprite_sheet.src = "images/ManaBar v5.png";
+	
+	this.zappy_sprite_sheet = new Image(792, 192);
+	this.zappy_sprite_sheet.src = "images/ZappyZap v1.png";
 }

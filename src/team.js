@@ -53,8 +53,10 @@ var Game = function (canvasId) {
 	this.towers = [];
 	this.towers.push(new Bullet_tower(0,0));
 	this.towers.push(new Laser_tower(0,0));
+	this.towers.push(new Zappy_tower(0,0));
 	this.tp.addTower(this.towers[0]);
 	this.tp.addTower(this.towers[1]);
+	this.tp.addTower(this.towers[2]);
 	
 	this.screen.onmousedown = function(e) { self.mousedown(e) };
 	this.screen.onmousemove = function(e) { self.mousemove(e) };

@@ -1,7 +1,7 @@
 var Virus = function(x, y, path) {
 	this.x = x;
 	this.y = y;
-	
+
 	this.path = path;
 	this.path_index = 0;
 	

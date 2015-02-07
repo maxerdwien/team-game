@@ -27,6 +27,9 @@ var Game = function (canvasId) {
 	this.gameTime = 0;
 	this.STARTING_FPS = 60;
 	
+	//Game stuff
+	this.pipeDream = new PipeDream(this);
+
 	resources = new Resources();
 	
 	// add td stuff
@@ -50,7 +53,10 @@ Game.prototype = {
 		var self = this;
 		
 		// doesn't work?
-		this.backBufferContext.clearRect(0, 0, WIDTH, HEIGHT);
+		this.backBufferContext.fillStyle="white";
+		this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		this.pipeDream.render(this.backBufferContext);
 		
 		for (var i = 0; i < this.baddies.length; i++) {
 			this.baddies[i].render(this.backBufferContext);
@@ -64,6 +70,9 @@ Game.prototype = {
 		var self = this;
 		
 		this.startTime = Date.now();
+		
+		//initialize pipeDream for testing.
+		this.pipeDream.init();
 		
 		window.requestNextAnimationFrame(
 			function(time) {

@@ -24,6 +24,9 @@ var Game = function (canvasId) {
 	this.lastTime = 0;
 	this.gameTime = 0;
 	this.STARTING_FPS = 60;
+	
+	//Game stuff
+	this.pipeDream = new PipeDream(this);
 }
 	
 Game.prototype = {
@@ -35,7 +38,9 @@ Game.prototype = {
 	},
 	
 	render: function(elapsedTime) {
-		
+		var self = this;
+		this.pipeDream.render(this.backBufferContext);
+		self.screenContext.drawImage(self.backBuffer, 0, 0);
 	},
 	
 	// The game loop.  See

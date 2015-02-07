@@ -9,6 +9,10 @@ var Virus = function(x, y, path) {
 	this.spritex = 0;
 	this.spritey = 0;
 	
+	this.mouth_open = true;
+	
+	this.damage_level = 0;
+	
 	// milliseconds to travel one large pixel
 	this.millis_per_pixel = 30;
 	
@@ -55,10 +59,22 @@ Virus.prototype.update = function(elapsedTime) {
 	this.sprite_cooldown -= elapsedTime;
 	if (this.sprite_cooldown <= 0) {
 		this.sprite_cooldown = this.max_sprite_cooldown;
-		if (this.spritex == 0) {
-			this.spritex = 64;
+		if (this.mouth_open) {
+			this.spritex += 64;
+			this.mouth_open = false;
 		} else {
-			this.spritex = 0;
+			this.spritex -= 64;
+			this.mouth_open = true;
 		}
+	}
+}
+
+Virus.prototype.hurt = function(damage) {
+	this.health -= damage;
+	
+	// change sprite damage amount
+	if (this.health < (3-this.damage_level)*this.max_health/4) {
+		this.spritex += 128;
+		this.damage_level++;
 	}
 }

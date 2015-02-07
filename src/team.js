@@ -50,9 +50,11 @@ Game.prototype = {
 	render: function(elapsedTime) {
 		var self = this;
 		this.pipeDream.render(this.backBufferContext);
-		for (var i = 0; i < this.baddies.length; i++) {
+		
+		/*for (var i = 0; i < this.baddies.length; i++) {
 			this.baddies[i].render(this.backBufferContext);
-		}
+		}*/
+		
 		self.screenContext.drawImage(self.backBuffer, 0, 0);
 	},
 	

@@ -9,6 +9,10 @@ var Virus = function(x, y, path) {
 	this.spritex = 0;
 	this.spritey = 0;
 	
+	this.dead = false;
+	
+	this.attack = 2;
+	
 	this.mouth_open = true;
 	
 	this.damage_level = 0;
@@ -51,6 +55,9 @@ Virus.prototype.update = function(elapsedTime) {
 		}
 		if (this.pixels_traveled >= 16) {
 			this.path_index++;
+			if (this.path_index > this.path.length-1) {
+				this.attackCPU();
+			}
 			this.pixels_traveled = 0;
 		}
 	}

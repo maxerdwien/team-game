@@ -1,7 +1,20 @@
 var TD_level = function() {
-	this.path = [3,3,0,0,3,3,3,3,3,0,0,0,1,1,1,1,0,0,3,3,3,3,3];
+	this.path = [3,3,0,0,3,3,3,3,3,0,0,0,1,1,1,1,0,0,3,3,3,3,3,3];
 	
 	this.data = [1, 7, 7, 7, 7, 7, 7, 7, 7, 7, 4, 2, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7, 1, 7, 7, 3, 2, 5, 7, 7, 7, 7, 1, 7, 7, 1, 7, 1, 7, 11, 7, 7, 1, 7, 7, 1, 7, 1, 7, 7, 7, 7, 1, 7, 7, 1, 7, 1, 7, 7, 7, 7, 4, 2, 2, 6, 7, 1, 7, 7, 10, 7, 7, 7, 7, 7, 7, 1, 7, 7, 7, 9, 7, 7, 7, 7, 7, 12, 7, 11];
+	
+	this.spawn_waves = [
+		[1, 0],
+		[8, 0],
+		[14, 0],
+		[19, 1],
+		[25, 1],
+		[35, 0,0,0,0,0,0,0,0,0,0,0,0,0]
+	];
+	
+	this.spawn_index = 0;
+	
+	this.level_time = 0;
 	
 	this.width = 10;
 	this.height = 9;
@@ -70,6 +83,27 @@ var TD_level = function() {
 }
 
 TD_level.prototype = {
+	update: function(elapsedTime) {
+		this.level_time += elapsedTime/1000;
+		if (typeof this.spawn_waves[this.spawn_index] != "undefined") {
+			if (this.level_time >= this.spawn_waves[this.spawn_index][0]) {
+				for (var i = 1; i < this.spawn_waves[this.spawn_index].length; i++) {
+					var newBaddie;
+					if (this.spawn_waves[this.spawn_index][i] == 0) {
+						newBaddie = new Virus(640, -64, this.path);
+					}
+					if (this.spawn_waves[this.spawn_index][i] == 1) {
+						newBaddie = new Worm(640, -64, this.path);
+					}
+					
+					game.baddies.push(newBaddie);
+				}
+				this.spawn_index++;
+				
+			}
+		}
+	},
+	
 	render: function(ctx) {
 		ctx.save();
 		for (var i = 0; i < this.data.length; i++) {

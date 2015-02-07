@@ -8,6 +8,10 @@ var Baddie = function() {
 	
 	this.max_health;
 	this.health;
+	
+	this.dead;
+	
+	this.attack;
 }
 
 Baddie.prototype = {
@@ -24,5 +28,6 @@ Baddie.prototype = {
 	
 	attackCPU: function() {
 		game.mana.remaining_mana -= this.attack;
+		this.dead = true;
 	}
 }

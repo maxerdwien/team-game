@@ -45,7 +45,8 @@ Bullet_tower.prototype.update = function(elapsedTime) {
 			this.cannon_ready = false;
 			this.firing = true;
 			if (game.baddies[i].health <= 0) {
-				game.baddies.splice(i, 1);
+				//game.baddies.splice(i, 1);
+				game.baddies[i].dead = true;
 			}
 			break;
 		}
@@ -62,7 +63,6 @@ Bullet_tower.prototype.render = function(ctx) {
 	ctx.save();
 	var x = this.x;
 	var y = this.y;
-	//ctx.translate(WIDTH,HEIGHT);
 	if (this.angle > 31*Math.PI/16 && this.angle < 32*Math.PI/16 ||
 		this.angle > 0*Math.PI/16 && this.angle <= 1*Math.PI/16) {
 		this.spritex = 0;

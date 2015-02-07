@@ -9,6 +9,10 @@ var Worm = function(x, y, path) {
 	this.spritex = 0;
 	this.spritey = 64;
 	
+	this.dead = false;
+	
+	this.attack = 1;
+	
 	this.wiggle_state = 0;
 	this.wiggle_direction = 1;
 	
@@ -53,6 +57,9 @@ Worm.prototype.update = function(elapsedTime) {
 		}
 		if (this.pixels_traveled >= 16) {
 			this.path_index++;
+			if (this.path_index > this.path.length-1) {
+				this.attackCPU();
+			}
 			this.pixels_traveled = 0;
 		}
 	}

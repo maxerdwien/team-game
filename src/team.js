@@ -59,12 +59,18 @@ Game.prototype = {
 	update: function(elapsedTime) {
 		this.mana.update(elapsedTime);
 		
-		for (var i = 0; i < this.baddies.length; i++) {
-			this.baddies[i].update(elapsedTime);
-		}
+		this.level.update(elapsedTime);
 		
 		for (var i = 0; i < this.towers.length; i++) {
 			this.towers[i].update(elapsedTime);
+		}
+		
+		for (var i = 0; i < this.baddies.length; i++) {
+			this.baddies[i].update(elapsedTime);
+			if (this.baddies[i].dead) {
+				this.baddies.splice(i, 1);
+				i--;
+			}
 		}
 	},
 	
@@ -90,7 +96,7 @@ Game.prototype = {
 			this.towers[i].render(this.backBufferContext);
 		}
 		
-		this.masher.render(this.backBufferContext);
+		//this.masher.render(this.backBufferContext);
 		
 		// Flip buffers
 		self.screenContext.drawImage(self.backBuffer, 0, 0);

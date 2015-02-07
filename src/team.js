@@ -29,14 +29,21 @@ var Game = function (canvasId) {
 	
 	//Game stuff
 	this.pipeDream = new PipeDream(this);
-
+	this.masher = new Masher(this);
+	
 	resources = new Resources();
 	
 	// add td stuff
 	this.level = new TD_level();
 	
+	this.cd = new Collision_detector();
+	
+	// it is important for targeting priority that this array be sorted by spawn order
 	this.baddies = [];
 	this.baddies.push(new Virus(640, -64, this.level.path));
+	
+	this.towers = [];
+	this.towers.push(new Bullet_tower(832, 192));
 }
 
 Game.prototype = {
@@ -47,20 +54,31 @@ Game.prototype = {
 		for (var i = 0; i < this.baddies.length; i++) {
 			this.baddies[i].update(elapsedTime);
 		}
+		
+		for (var i = 0; i < this.towers.length; i++) {
+			this.towers[i].update(elapsedTime);
+		}
 	},
 	
 	render: function(elapsedTime) {
 		var self = this;
 		
-		// doesn't work?
 		this.backBufferContext.fillStyle="white";
 		this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		this.pipeDream.render(this.backBufferContext);
 		
+		this.level.render(this.backBufferContext);
+		
 		for (var i = 0; i < this.baddies.length; i++) {
 			this.baddies[i].render(this.backBufferContext);
 		}
+		
+		for (var i = 0; i < this.towers.length; i++) {
+			this.towers[i].render(this.backBufferContext);
+		}
+		
+		this.masher.render(this.backBufferContext);
 		
 		// Flip buffers
 		self.screenContext.drawImage(self.backBuffer, 0, 0);

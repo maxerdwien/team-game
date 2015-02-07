@@ -18,7 +18,7 @@ PipeDream.prototype = {
 		context.fillStyle="black";
 		context.fillRect(0, 0, this.screenWidth, this.screenHeight);
 		context.restore();
-	}
+	},
 	
 	update: function()
 	{

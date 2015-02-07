@@ -12,7 +12,7 @@ pipeTile.prototype = {
 	render: function(context)
 	{
 		
-	}
+	},
 	
 	update: function()
 	{

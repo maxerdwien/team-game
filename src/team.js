@@ -32,6 +32,7 @@ var Game = function (canvasId) {
 	//Game stuff
 	this.pipeDream = new PipeDream(this);
 	this.masher = new Masher(this);
+	this.cutscene = new Cutscene(this);
 	
 	this.mode = "Cutscene";
 	//Cutscene
@@ -75,46 +76,58 @@ Game.prototype = {
 	// Update the game world.  See
 	// http://gameprogrammingpatterns.com/update-method.html
 	update: function(elapsedTime) {
-		this.mana.update(elapsedTime);
-		
-		this.level.update(elapsedTime);
-		this.pipeDream.render(this.backBufferContext);
-		this.pipeDream.update();
-		
-		for (var i = 0; i < this.towers.length; i++) {
-			this.towers[i].update(elapsedTime);
+		if (this.mode == "Cutscene")
+		{
+			this.cutscene.update();
 		}
-		
-		for (var i = 0; i < this.baddies.length; i++) {
-			this.baddies[i].update(elapsedTime);
-			if (this.baddies[i].dead) {
-				this.baddies.splice(i, 1);
-				i--;
+		else
+		{
+			this.pipeDream.update();
+			this.mana.update(elapsedTime);
+			
+			this.level.update(elapsedTime);
+			
+			for (var i = 0; i < this.towers.length; i++) {
+				this.towers[i].update(elapsedTime);
+			}
+			
+			for (var i = 0; i < this.baddies.length; i++) {
+				this.baddies[i].update(elapsedTime);
+				if (this.baddies[i].dead) {
+					this.baddies.splice(i, 1);
+					i--;
+				}
 			}
 		}
 	},
 	
 	render: function(elapsedTime) {
 		var self = this;
-		
-		this.backBufferContext.fillStyle="white";
-		this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
-		
-		this.level.render(this.backBufferContext);
-		
-		for (var i = 0; i < this.baddies.length; i++) {
-			this.baddies[i].render(this.backBufferContext);
+		if (this.mode == "Cutscene")
+		{
+			this.cutscene.render(this.backBufferContext);
 		}
-		
-		this.tp.render(this.backBufferContext);
-		
-		for (var i = 0; i < this.towers.length; i++) {
-			this.towers[i].render(this.backBufferContext);
+		else
+		{	
+			this.backBufferContext.fillStyle="white";
+			this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
+			
+			this.mana.render(this.backBufferContext);
+			
+			this.level.render(this.backBufferContext);
+			
+			for (var i = 0; i < this.baddies.length; i++) {
+				this.baddies[i].render(this.backBufferContext);
+			}
+			
+			this.tp.render(this.backBufferContext);
+			
+			for (var i = 0; i < this.towers.length; i++) {
+				this.towers[i].render(this.backBufferContext);
+			}
+			
+			this.pipeDream.render(this.backBufferContext);
 		}
-		
-		this.mana.render(this.backBufferContext);
-		
-		this.pipeDream.render(this.backBufferContext);
 		
 		//this.masher.render(this.backBufferContext);
 		

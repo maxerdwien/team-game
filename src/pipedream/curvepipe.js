@@ -196,7 +196,7 @@ curvePipe.prototype = {
 			this.source = { x: this.x, y: this.y+1 };
 			this.dest = { x: this.x-1, y: this.y };
 		}
-		this.checkPath();
+		//this.checkPath();
 	},
 	
 	setDir: function(set)

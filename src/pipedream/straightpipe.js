@@ -1,4 +1,4 @@
-var straightPipe = function(x, y, gx, gy, width, height, game)
+var straightPipe = function(x, y, gx, gy, width, height, game, test)
 {
 	this.x = x;
 	this.y = y;
@@ -13,13 +13,19 @@ var straightPipe = function(x, y, gx, gy, width, height, game)
 	this.game = game;
 	this.dir = 0;
 	this.connected = false;
+	this.test = test;
 }
 
 straightPipe.prototype = {
 	render: function(context)
 	{
 		context.save();
-		if(this.dir == 0)
+		if(this.test == true)
+		{
+			context.fillStyle = "blue";
+			context.fillRect(this.x, this.y, this.width, this.height);
+		}
+		else if(this.dir == 0)
 		{
 			context.drawImage(resources.pipes_sprite_sheet,
 							this.spritex,
@@ -109,7 +115,7 @@ straightPipe.prototype = {
 			this.source = { x: this.x, y: this.y-1 };
 			this.dest = { x: this.x, y: this.y+1 };
 		}
-		this.checkPath();
+		//this.checkPath();
 	},
 	
 	setDir: function(set)
@@ -140,11 +146,11 @@ straightPipe.prototype = {
 	
 	checkPath: function()
 	{
-		if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
+		if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
 		{
 			this.connected = true;
 		}
-		else if(this.dest.x < game.pipeDream.gridWidth && this.dest.x >= 0 && this.dest.y < game.pipeDream.gridHeight && this.dest.y >= 0 && game.pipDream.pipeTiles[(this.dest.y * 9) + this.dest.x].connected == true)
+		else if(this.dest.x < game.pipeDream.gridWidth && this.dest.x >= 0 && this.dest.y < game.pipeDream.gridHeight && this.dest.y >= 0 && game.pipeDream.pipeTiles[(this.dest.y * 9) + this.dest.x].connected == true)
 		{
 			if(this.dir == 0) setDir(3);
 			else if(this.dir == 1) setDir(2);

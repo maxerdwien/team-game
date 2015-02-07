@@ -113,6 +113,9 @@ TD_level.prototype = {
 		ctx.save();
 		for (var i = 0; i < this.data.length; i++) {
 			var img = this.data[i];
+			// upper right corner
+			if (i == this.width-1) {
+				ctx.drawImage(
 			ctx.drawImage(resources.tower_defense_sprite_sheet,
 				64*(this.data[i]-1), 0, 64, 64,
 				640+(i % this.width)*64, 64*Math.floor(i/this.width), 64, 64);

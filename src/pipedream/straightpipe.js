@@ -25,7 +25,7 @@ straightPipe.prototype = {
 			context.fillStyle = "blue";
 			context.fillRect(this.x, this.y, this.width, this.height);
 		}
-		else if(this.dir == 0)
+		if(this.dir == 0)
 		{
 			context.drawImage(resources.pipes_sprite_sheet,
 							this.spritex,
@@ -56,7 +56,7 @@ straightPipe.prototype = {
 		{
 			context.translate(this.x, this.y);
 			context.rotate(Math.PI/2);
-			context.translate(0, this.height);
+			context.translate(0, -this.height);
 			context.drawImage(resources.pipes_sprite_sheet,
 							this.spritex,
 							this.spritey,
@@ -71,7 +71,7 @@ straightPipe.prototype = {
 		{
 			context.translate(this.x, this.y);
 			context.rotate(Math.PI);
-			context.translate(-this.width, 0);
+			context.translate(-this.width, -this.height);
 			context.drawImage(resources.pipes_sprite_sheet,
 							this.spritex,
 							this.spritey,

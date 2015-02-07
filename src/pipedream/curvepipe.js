@@ -95,7 +95,7 @@ curvePipe.prototype = {
 			{
 				context.translate(this.x, this.y);
 				context.rotate(Math.PI/2);
-				context.translate(0, this.height);
+				context.translate(0, -this.height);
 				context.drawImage(resources.pipes_sprite_sheet,
 								this.spritex,
 								this.spritey,
@@ -110,7 +110,7 @@ curvePipe.prototype = {
 			{
 				context.translate(this.x, this.y);
 				context.rotate(Math.PI/2);
-				context.translate(0, this.height);
+				context.translate(0, -this.height);
 				context.scale(-1, 1);
 				context.translate(-this.width, 0);
 				context.rotate(-Math.PI/2);
@@ -132,7 +132,7 @@ curvePipe.prototype = {
 			{
 				context.translate(this.x, this.y);
 				context.rotate(Math.PI);
-				context.translate(-this.width, 0);
+				context.translate(-this.width, -this.height);
 				context.drawImage(resources.pipes_sprite_sheet,
 								this.spritex,
 								this.spritey,
@@ -147,7 +147,7 @@ curvePipe.prototype = {
 			{
 				context.translate(this.x, this.y);
 				context.rotate(Math.PI);
-				context.translate(-this.width, 0);
+				context.translate(-this.width, -this.height);
 				context.scale(-1, 1);
 				context.translate(-this.width, 0);
 				context.rotate(-Math.PI/2);

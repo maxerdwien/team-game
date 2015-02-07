@@ -30,10 +30,12 @@ var Game = function (canvasId) {
 	resources = new Resources();
 	
 	// add td stuff
-	this.baddies = [];
-	this.baddies.push(new Virus(0, 0));
-}
+	this.level = new TD_level();
 	
+	this.baddies = [];
+	this.baddies.push(new Virus(640, -64, this.level.path));
+}
+
 Game.prototype = {
 
 	// Update the game world.  See
@@ -46,6 +48,9 @@ Game.prototype = {
 	
 	render: function(elapsedTime) {
 		var self = this;
+		
+		// doesn't work?
+		this.backBufferContext.clearRect(0, 0, WIDTH, HEIGHT);
 		
 		for (var i = 0; i < this.baddies.length; i++) {
 			this.baddies[i].render(this.backBufferContext);

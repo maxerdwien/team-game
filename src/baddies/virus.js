@@ -69,6 +69,13 @@ Virus.prototype.update = function(elapsedTime) {
 	}
 }
 
+Virus.prototype.render = function(ctx) {
+	ctx.save();
+	ctx.drawImage(this.image, this.spritex, this.spritey, 64, 64,
+		this.x, this.y, 64, 64);
+	ctx.restore();
+}
+
 Virus.prototype.hurt = function(damage) {
 	this.health -= damage;
 	

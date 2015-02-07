@@ -39,7 +39,8 @@ var Game = function (canvasId) {
 	
 	// it is important for targeting priority that this array be sorted by spawn order
 	this.baddies = [];
-	this.baddies.push(new Virus(640, -64, this.level.path));
+	//this.baddies.push(new Virus(640, -64, this.level.path));
+	this.baddies.push(new Worm(640, -64, this.level.path));
 	
 	this.towers = [];
 	this.towers.push(new Bullet_tower(832, 192));

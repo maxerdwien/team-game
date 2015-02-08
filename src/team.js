@@ -49,7 +49,7 @@ var Game = function (canvasId) {
 	this.mana = new Mana_pool();
 	
 	// add td stuff
-	this.level = new TD_level();
+	this.level = new TD_level(0);
 	
 	this.cd = new Collision_detector();
 	
@@ -62,9 +62,16 @@ var Game = function (canvasId) {
 	this.towers.push(new Bullet_tower(0,0));
 	this.towers.push(new Laser_tower(0,0));
 	this.towers.push(new Zappy_tower(0,0));
+	this.towers.push(new Bullet_tower(0,0));
+	this.towers.push(new Laser_tower(0,0));
+	this.towers.push(new Zappy_tower(0,0));
+	
 	this.tp.addTower(this.towers[0]);
 	this.tp.addTower(this.towers[1]);
 	this.tp.addTower(this.towers[2]);
+	this.tp.addTower(this.towers[3]);
+	this.tp.addTower(this.towers[4]);
+	this.tp.addTower(this.towers[5]);
 	
 	this.screen.onmousedown = function(e) { self.mousedown(e) };
 	this.screen.onmousemove = function(e) { self.mousemove(e) };
@@ -76,14 +83,16 @@ Game.prototype = {
 	// Update the game world.  See
 	// http://gameprogrammingpatterns.com/update-method.html
 	update: function(elapsedTime) {
-		
-		console.log(this.mode);
-		
 		if (this.mode == "Cutscene")
 		{
 			this.cutscene.update();
 		}
-		else if (this.mode == "Towers" && !this.level.done_spawning)
+		else if (this.mode == "Towers" && (this.level.done_spawning && this.baddies.length == 0))
+		{
+			this.mode = "Mashing";
+			console.log("here");
+		}
+		else if (this.mode == "Towers")
 		{
 			this.pipeDream.update();
 			this.mana.update(elapsedTime);
@@ -111,11 +120,6 @@ Game.prototype = {
 				}
 			}
 		}
-		else if (this.mode == "Towers" && this.level.done_spawning)
-		{
-			this.mode = "Mashing";
-			console.log("here");
-		}
 	},
 	
 	render: function(elapsedTime) {
@@ -133,8 +137,6 @@ Game.prototype = {
 			this.backBufferContext.fillStyle="white";
 			this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
 			
-			this.mana.render(this.backBufferContext);
-			
 			this.level.render(this.backBufferContext);
 			
 			for (var i = 0; i < this.baddies.length; i++) {
@@ -146,6 +148,8 @@ Game.prototype = {
 			for (var i = 0; i < this.towers.length; i++) {
 				this.towers[i].render(this.backBufferContext);
 			}
+			
+			this.mana.render(this.backBufferContext);
 			
 			this.pipeDream.render(this.backBufferContext);
 		}

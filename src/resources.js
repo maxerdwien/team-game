@@ -63,4 +63,35 @@ var Resources = function() {
 
 	this.ranges_sprite_sheet = new Image(576, 256);
 	this.ranges_sprite_sheet.src = "images/Ranges v2.png";
+	
+	//Sound effects
+	
+	this.die_scream = new Audio();
+	this.die_scream.src = "sfx/EnemyDeath.wav";
+	
+	this.wilhelm_scream = new Audio();
+	this.wilhelm_scream.src = "sfx/64939__syna-max__wilhelm-scream.wav";
+	
+	this.bullet_fire = new Audio();
+	this.bullet_fire.src = "sfx/Bullet.wav";
+	
+	this.laser_fire = new Audio();
+	this.laser_fire.src = "sfx/laser.wav";
+	
+	this.zap_fire = new Audio();
+	this.zap_fire.src = "sfx/131592__gowers__transformer-024-camera.wav";
+	
+	this.td_start = new Audio();
+	this.td_start.src = "sfx/131006__shot846__robot-letsrock-by-shot846.wav";
+	
+	this.turret_get = new Audio();
+	this.turret_get.src = "sfx/TurretPickup.wav";
+	
+	this.alarm = new Audio();
+	this.alarm.src = "sfx/Alarm.wav";
+	
+	//Music
+	
+	this.td_music = new Audio();
+	this.td_music.src = "music/48544__flick3r__rezzo-4.wav"
 }

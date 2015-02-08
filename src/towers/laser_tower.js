@@ -58,6 +58,7 @@ Laser_tower.prototype.update = function(elapsedTime) {
 							this.angle -= 2*Math.PI;
 						}
 						game.baddies[i].hurt(this.damage);
+						resources.laser_fire.play();
 						
 						// damage all baddies in the laser's path
 						for (var j = i+1; j < game.baddies.length; j++) {

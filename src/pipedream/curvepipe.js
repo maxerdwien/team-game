@@ -16,6 +16,7 @@ var curvePipe = function(x, y, gx, gy, width, height, game)
 	this.flip = false;
 	this.flowing = false;
 	this.timer = 11;
+	this.flowspeed = 11;
 	this.full = false;
 }
 
@@ -176,7 +177,7 @@ curvePipe.prototype = {
 			this.timer--;
 			if(this.timer <= 0)
 			{
-				this.timer = 11;
+				this.timer = this.flowspeed;
 				if(this.spritex / 64 < 17)
 				{
 					this.spritex += 64;

@@ -15,6 +15,7 @@ var straightPipe = function(x, y, gx, gy, width, height, game)
 	this.connected = false;
 	this.flowing = false;
 	this.timer = 11;
+	this.flowspeed = 11;
 	this.full = false;
 }
 
@@ -89,7 +90,7 @@ straightPipe.prototype = {
 			this.timer--;
 			if(this.timer <= 0)
 			{
-				this.timer = 11;
+				this.timer = this.flowspeed;
 				if(this.spritex / 64 < 17)
 				{
 					this.spritex += 64;

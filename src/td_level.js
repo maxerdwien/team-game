@@ -42,11 +42,7 @@ var TD_level = function(level) {
 			[73.6, 0],
 			[78, 0],
 			[78.3, 0],
-			[78.6, 0],
-			[84, 0],
-			[85, 0],
-			[86, 0],
-			[87, 0]
+			[78.6, 0]
 		];
 	}
 	else if (level == 1) {
@@ -225,9 +221,9 @@ var TD_level = function(level) {
 	
 	this.width = 10;
 	this.height = 9;
-	if (this.width * this.height != this.data.length) {
-		console.log("ouch!");
-	}
+	//if (this.width * this.height != this.data.length) {
+		//console.log("ouch!");
+	//}
 	
 	this.noBuildZones = [];
 	for (var i = 0; i < this.data.length; i++) {

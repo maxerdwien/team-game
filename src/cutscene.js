@@ -15,7 +15,7 @@ Cutscene.prototype = {
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.screen1, 0, 0, 1280, 320, 0, 160, 1280, 320);
 				this.counter++;
-				if (this.counter >= 30) //change to 600 or maybe 500
+				if (this.counter >= 600) //change to 600 or maybe 500
 				{
 					this.counter = 0;
 					this.currentScene++;
@@ -26,7 +26,7 @@ Cutscene.prototype = {
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.screen2, 0, 0, 1280, 320, 0, 160, 1280, 320);
 				this.counter++;
-				if (this.counter >= 30) //change to 600 or maybe 500
+				if (this.counter >= 600) //change to 600 or maybe 500
 				{
 					this.counter = 0;
 					this.currentScene++;
@@ -37,7 +37,7 @@ Cutscene.prototype = {
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.screen3, 0, 0, 1280, 320, 0, 160, 1280, 320);
 				this.counter++;
-				if (this.counter >= 30) //change to 600 or maybe 500
+				if (this.counter >= 600) //change to 600 or maybe 500
 				{
 					this.counter = 0;
 					this.currentScene++;

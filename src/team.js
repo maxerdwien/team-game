@@ -77,8 +77,6 @@ Game.prototype = {
 	// http://gameprogrammingpatterns.com/update-method.html
 	update: function(elapsedTime) {
 		
-		console.log(this.mode);
-		
 		if (this.mode == "Cutscene")
 		{
 			this.cutscene.update();
@@ -114,7 +112,6 @@ Game.prototype = {
 		else if (this.mode == "Towers" && this.level.done_spawning)
 		{
 			this.mode = "Mashing";
-			console.log("here");
 		}
 	},
 	

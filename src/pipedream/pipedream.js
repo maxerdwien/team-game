@@ -67,7 +67,7 @@ PipeDream.prototype = {
 		var lastpt = { x: 0, y: 0 }
 		var curpt = { x: 0, y: 1 }
 		var nxtpt = { x: 0, y: 1 }
-		this.pipeTiles[curpt.x + curpt.y * this.gridWidth] = this.pipeTiles[curpt.x + curpt.y * this.gridWidth] = new straightPipe(curpt.x * this.cellWidth, curpt.y * this.cellHeight, curpt.x, curpt.y, this.cellWidth, this.cellHeight,game);
+		this.pipeTiles[curpt.x + curpt.y * this.gridWidth] = new straightPipe(curpt.x * this.cellWidth, curpt.y * this.cellHeight, curpt.x, curpt.y, this.cellWidth, this.cellHeight,game);
 		while(pathLength > 0)
 		{
 			var rng = Math.floor(Math.random() * 4);
@@ -107,6 +107,19 @@ PipeDream.prototype = {
 		else if(lastpt.x > curpt.x) this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(2);
 		else if(lastpt.y < curpt.y) this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(0);
 		else this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(3);
+		
+		var numEnds = 3;
+		while(numEnds > 0)
+		{
+			var x = Math.floor(Math.random() * 9);
+			var y = Math.floor(Math.random() * 9);
+			if(this.pipeTiles[x + y * this.gridWidth] == undefined)
+			{
+				this.pipeTiles[x + y * this.gridWidth] = new endPipe(x * this.cellWidth, y * this.cellHeight, x, y, this.cellWidth, this.cellHeight, game);
+				this.pipeTiles[x + y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
+				numEnds--;
+			}
+		}
 		
 		for(var i = 0; i < this.gridHeight; i++)
 		{

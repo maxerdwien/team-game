@@ -83,7 +83,7 @@ Game.prototype = {
 		{
 			this.cutscene.update();
 		}
-		else if (this.mode != "Mashing")
+		else if (this.mode == "Towers" && !this.level.done_spawning)
 		{
 			this.pipeDream.update();
 			this.mana.update(elapsedTime);
@@ -114,6 +114,7 @@ Game.prototype = {
 		else if (this.mode == "Towers" && this.level.done_spawning)
 		{
 			this.mode = "Mashing";
+			console.log("here");
 		}
 	},
 	

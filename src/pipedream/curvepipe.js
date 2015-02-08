@@ -192,30 +192,32 @@ curvePipe.prototype = {
 	
 	rotate: function()
 	{
-		this.dir ++;
-		this.dir = this.dir % 4;
-		
-		if(this.dir == 0)
+		if(this.flowing == false && this.full == false)
 		{
-			this.source = { x: this.gridx+1, y: this.gridy };
-			this.dest = { x: this.gridx, y: this.gridy+1 };
+			this.dir ++;
+			this.dir = this.dir % 4;
+			
+			if(this.dir == 0)
+			{
+				this.source = { x: this.gridx+1, y: this.gridy };
+				this.dest = { x: this.gridx, y: this.gridy+1 };
+			}
+			else if(this.dir == 1)
+			{
+				this.source = { x: this.gridx+1, y: this.gridy };
+				this.dest = { x: this.gridx, y: this.gridy-1 };
+			}
+			else if(this.dir == 2)
+			{
+				this.source = { x: this.gridx-1, y: this.gridy };
+				this.dest = { x: this.gridx, y: this.gridy+1 };
+			}
+			else if(this.dir == 3)
+			{
+				this.source = { x: this.gridx, y: this.gridy-1 };
+				this.dest = { x: this.gridx-1, y: this.gridy };
+			}
 		}
-		else if(this.dir == 1)
-		{
-			this.source = { x: this.gridx+1, y: this.gridy };
-			this.dest = { x: this.gridx, y: this.gridy-1 };
-		}
-		else if(this.dir == 2)
-		{
-			this.source = { x: this.gridx-1, y: this.gridy };
-			this.dest = { x: this.gridx, y: this.gridy+1 };
-		}
-		else if(this.dir == 3)
-		{
-			this.source = { x: this.gridx, y: this.gridy-1 };
-			this.dest = { x: this.gridx-1, y: this.gridy };
-		}
-		//this.checkPath();
 	},
 	
 	setDir: function(set)

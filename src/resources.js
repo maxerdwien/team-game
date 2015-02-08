@@ -11,7 +11,7 @@ var Resources = function() {
 	this.towers_sprite_sheet.src = "images/Towers v3.png";
 	
 	this.tower_defense_sprite_sheet = new Image(768, 64);
-	this.tower_defense_sprite_sheet.src = "images/TowerDefense v3.png";
+	this.tower_defense_sprite_sheet.src = "images/TowerDefense v5.png";
 	
 	this.wave_sprite_sheet = new Image(512, 64);
 	this.wave_sprite_sheet.src = "images/Wave v2.png";

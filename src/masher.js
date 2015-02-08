@@ -114,10 +114,21 @@ Masher.prototype = {
 		if (this.secondCounter >= 810) context.drawImage(resources.hack_bar, 1088, 576);
 		if (this.secondCounter >= 855) context.drawImage(resources.hack_bar, 1152, 576);
 		if (this.secondCounter >= 900) context.drawImage(resources.hack_bar, 1216, 576);
-		if (this.secondCounter <= 0)
+		if (this.secondCounter <= 0 && this.counter <= 0)
 		{
+			this.counter++;
 			this.detected = false;
 			context.drawImage(resources.masher_game_over, 0, 0, 320, 320, 480, 192, 320, 320);
+		}
+		else if (this.secondCounter <= 0 && this.counter <= 300)
+		{
+			this.counter++;
+			context.drawImage(resources.masher_game_over, 0, 0, 320, 320, 480, 192, 320, 320);
+		}
+		else if (this.secondCounter <= 0)
+		{
+			console.log(game.mode);
+			game.mode = "Cutscene";
 		}
 	},
 	
@@ -136,10 +147,32 @@ Masher.prototype = {
 			}
 			this.progress++;
 			if (this.progress == 10) this.detected = true; 
-			if (this.progress == 150) console.log("Level one bonus achieved!");
-			if (this.progress == 300) console.log("Level two bonus achieved!");
-			if (this.progress == 450) console.log("Level three bonus achieved!");
-			if (this.progress == 600) console.log("Level four bonus achieved!");
+			if (this.progress == 150) 
+			{
+				console.log("Level one bonus achieved!");
+				game.towers.push(new Bullet_tower(0,0));
+				game.tp.addTower(game.towers[game.towers.length-1]);
+				
+			}
+			if (this.progress == 300) 
+			{
+				console.log("Level two bonus achieved!");
+				game.towers.push(new Bullet_tower(0,0));
+				game.tp.addTower(game.towers[game.towers.length-1]);
+				
+			}
+			if (this.progress == 450)
+			{	
+				console.log("Level three bonus achieved!");
+				game.towers.push(new Zappy_tower(0,0));
+				game.tp.addTower(game.towers[game.towers.length-1]);
+			}
+			if (this.progress == 600) 
+			{
+				console.log("Level four bonus achieved!");
+				game.towers.push(new Laser_tower(0,0));
+				game.tp.addTower(game.towers[game.towers.length-1]);
+			}
 			this.completed.push(Math.floor(16*Math.random())*32);
 		}
 	}

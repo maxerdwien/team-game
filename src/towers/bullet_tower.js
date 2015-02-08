@@ -54,6 +54,12 @@ Bullet_tower.prototype.update = function(elapsedTime) {
 }
 
 Bullet_tower.prototype.render = function(ctx) {
+	if (this.mode == "dragging") {
+		ctx.save();
+		ctx.drawImage(resources.ranges_sprite_sheet, 0, 0, 256, 256,
+			this.x+(32-128), this.y+(32-128), 256, 256);
+		ctx.restore();
+	}
 	ctx.save();
 	var x = this.x;
 	var y = this.y;
@@ -155,6 +161,7 @@ Bullet_tower.prototype.render = function(ctx) {
 	ctx.drawImage(this.image, this.spritex, this.spritey, 64, 64,
 		this.x, this.y, 64, 64);
 	ctx.restore();
+	
 }
 
 Bullet_tower.prototype.getRange = function() {

@@ -32,6 +32,7 @@ var Game = function (canvasId) {
 	//Game stuff
 	this.pipeDream = new PipeDream(this);
 	this.masher = new Masher(this);
+	this.cutscene = new Cutscene(this);
 	
 	this.mode = "Cutscene";
 	//Cutscene
@@ -75,48 +76,78 @@ Game.prototype = {
 	// Update the game world.  See
 	// http://gameprogrammingpatterns.com/update-method.html
 	update: function(elapsedTime) {
-		this.mana.update(elapsedTime);
 		
-		this.level.update(elapsedTime);
+		console.log(this.mode);
 		
-		this.pipeDream.update();
-		
-		for (var i = 0; i < this.towers.length; i++) {
-			this.towers[i].update(elapsedTime);
+		if (this.mode == "Cutscene")
+		{
+			this.cutscene.update();
 		}
-		
-		for (var i = 0; i < this.baddies.length; i++) {
-			this.baddies[i].update(elapsedTime);
-			if (this.baddies[i].dead) {
-				this.baddies.splice(i, 1);
-				i--;
+		else if (this.mode != "Mashing")
+		{
+			this.pipeDream.update();
+			this.mana.update(elapsedTime);
+			
+			this.level.update(elapsedTime);
+			
+			this.pipeDream.update();
+			
+			for (var i = 0; i < this.towers.length; i++) {
+				this.towers[i].update(elapsedTime);
 			}
+			
+			for (var i = 0; i < this.baddies.length; i++) {
+				this.baddies[i].update(elapsedTime);
+				if (this.baddies[i].dead) {
+					// check it it's a trojan
+					if (this.baddies[i].spritey == 128) {
+						var newGuy = new Virus(this.baddies[i].x, this.baddies[i].y, this.level.path);
+						newGuy.pixels_traveled = this.baddies[i].pixels_traveled;
+						newGuy.path_index = this.baddies[i].path_index;
+						this.baddies.push(newGuy);
+					}
+					this.baddies.splice(i, 1);
+					i--;
+				}
+			}
+		}
+		else if (this.mode == "Towers" && this.level.done_spawning)
+		{
+			this.mode = "Mashing";
 		}
 	},
 	
 	render: function(elapsedTime) {
 		var self = this;
-		
-		this.backBufferContext.fillStyle="white";
-		this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
-		
-		this.mana.render(this.backBufferContext);
-		
-		this.level.render(this.backBufferContext);
-		
-		for (var i = 0; i < this.baddies.length; i++) {
-			this.baddies[i].render(this.backBufferContext);
+		if (this.mode == "Cutscene")
+		{
+			this.cutscene.render(this.backBufferContext);
 		}
-		
-		this.tp.render(this.backBufferContext);
-		
-		for (var i = 0; i < this.towers.length; i++) {
-			this.towers[i].render(this.backBufferContext);
+		else if (this.mode == "Mashing")
+		{
+			this.masher.render(this.backBufferContext);
 		}
-		
-		this.pipeDream.render(this.backBufferContext);
-		
-		//this.masher.render(this.backBufferContext);
+		else
+		{	
+			this.backBufferContext.fillStyle="white";
+			this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
+			
+			this.mana.render(this.backBufferContext);
+			
+			this.level.render(this.backBufferContext);
+			
+			for (var i = 0; i < this.baddies.length; i++) {
+				this.baddies[i].render(this.backBufferContext);
+			}
+			
+			this.tp.render(this.backBufferContext);
+			
+			for (var i = 0; i < this.towers.length; i++) {
+				this.towers[i].render(this.backBufferContext);
+			}
+			
+			this.pipeDream.render(this.backBufferContext);
+		}
 		
 		// Flip buffers
 		self.screenContext.drawImage(self.backBuffer, 0, 0);
@@ -155,13 +186,27 @@ Game.prototype = {
 		if (this.dragging != null) {
 			this.dragging.x = 64*Math.floor((this.mousex)/64);
 			this.dragging.y = 64*Math.floor((this.mousey)/64);
+			
 		}
 	},
 	
 	mouseup: function(e) {
 		if (this.dragging != null) {
-			if (this.dragging.x >= 640) {
-				this.dragging.mode = "deployed";
+			if (this.dragging.x >= 640 && this.dragging.y < 576) {
+				var restricted = false;
+				for (var i = 0; i < this.level.noBuildZones.length; i++) {
+					if (this.dragging.x == this.level.noBuildZones[i].x &&
+						this.dragging.y == this.level.noBuildZones[i].y) {
+						restricted = true;
+					}
+				}
+				if (restricted) {
+					this.dragging.mode = "ready";
+				} else {
+					this.dragging.mode = "deployed";
+					var newNoBuild = {x: this.dragging.x, y: this.dragging.y };
+					this.level.noBuildZones.push(newNoBuild);
+				}
 			} else {
 				this.dragging.mode = "ready";
 			}

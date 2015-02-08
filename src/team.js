@@ -42,7 +42,7 @@ var Game = function (canvasId) {
 	//Pipes
 	//Towers
 	//Mashing
-	
+	//GameOver
 	
 	resources = new Resources();
 	
@@ -86,6 +86,12 @@ Game.prototype = {
 	// Update the game world.  See
 	// http://gameprogrammingpatterns.com/update-method.html
 	update: function(elapsedTime) {
+		if (this.mana.remaining_mana <= 0)
+		{
+			console.log("here");
+			this.mode = "GameOver";
+			this.cutscene.currentScene = 15;
+		}
 		if (this.mode == "Cutscene")
 		{
 			this.cutscene.update();
@@ -103,7 +109,6 @@ Game.prototype = {
 				this.towers = [];
 				this.level = new TD_level(this.levelNumber);
 			}
-			console.log(this.timer);
 		}
 		else if (this.mode == "Towers")
 		{
@@ -137,7 +142,7 @@ Game.prototype = {
 	
 	render: function(elapsedTime) {
 		var self = this;
-		if (this.mode == "Cutscene")
+		if (this.mode == "Cutscene" || this.mode == "GameOver")
 		{
 			this.cutscene.render(this.backBufferContext);
 		}
@@ -165,6 +170,13 @@ Game.prototype = {
 			this.mana.render(this.backBufferContext);
 			
 			this.pipeDream.render(this.backBufferContext);
+			
+			if (this.mode == "Towers" && (this.level.done_spawning && this.baddies.length == 0))
+			{
+				this.backBufferContext.fillStyle="black";
+				this.backBufferContext.fillRect(480, 192, 480, 320);
+				this.backBufferContext.drawImage(resources.level_complete, 0, 0, 480, 320, 480, 192, 480, 320);
+			}
 		}
 		
 		// Flip buffers

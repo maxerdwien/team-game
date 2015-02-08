@@ -76,17 +76,21 @@ Game.prototype = {
 	// Update the game world.  See
 	// http://gameprogrammingpatterns.com/update-method.html
 	update: function(elapsedTime) {
-	console.log(this.mode);
+		
+		console.log(this.mode);
+		
 		if (this.mode == "Cutscene")
 		{
 			this.cutscene.update();
 		}
-		else if (this.mode != "Mashing")
+		else if (this.mode == "Towers" && !this.level.done_spawning)
 		{
 			this.pipeDream.update();
 			this.mana.update(elapsedTime);
 			
 			this.level.update(elapsedTime);
+			
+			this.pipeDream.update();
 			
 			for (var i = 0; i < this.towers.length; i++) {
 				this.towers[i].update(elapsedTime);
@@ -110,6 +114,7 @@ Game.prototype = {
 		else if (this.mode == "Towers" && this.level.done_spawning)
 		{
 			this.mode = "Mashing";
+			console.log("here");
 		}
 	},
 	
@@ -156,6 +161,15 @@ Game.prototype = {
 			y: this.mousey,
 			r: 0
 		};
+		if(mouseHitbox.x < this.pipeDream.screenWidth && mouseHitbox.y < this.pipeDream.screenHeight)
+		{
+			var grX = Math.floor(mouseHitbox.x / this.pipeDream.cellWidth);
+			var grY = Math.floor(mouseHitbox.y / this.pipeDream.cellHeight);
+			
+			this.pipeDream.pipeTiles[grX + grY * this.pipeDream.gridWidth].rotate();
+			this.pipeDream.checkPath();
+		}
+		
 		for (var i = 0; i < this.towers.length; i++) {
 			if (this.towers[i].mode == "ready" &&
 				this.cd.detect(mouseHitbox, this.towers[i].getHitbox())) {

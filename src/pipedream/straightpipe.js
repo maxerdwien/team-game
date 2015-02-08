@@ -13,6 +13,9 @@ var straightPipe = function(x, y, gx, gy, width, height, game)
 	this.game = game;
 	this.dir = 0;
 	this.connected = false;
+	this.flowing = false;
+	this.timer = 11;
+	this.full = false;
 }
 
 straightPipe.prototype = {
@@ -81,12 +84,28 @@ straightPipe.prototype = {
 	
 	update: function()
 	{
-		
+		if(this.flowing == true)
+		{
+			this.timer--;
+			if(this.timer <= 0)
+			{
+				this.timer = 11;
+				if(this.spritex / 64 < 17)
+				{
+					this.spritex += 64;
+				}
+				else
+				{
+					this.spritex -= 64;
+					this.full = true;
+				}
+			}
+		}
 	},
 	
 	rotate: function()
 	{
-		this.dir++;
+		this.dir += 2;
 		this.dir = this.dir % 4;
 		
 		if(this.dir == 0)
@@ -138,24 +157,40 @@ straightPipe.prototype = {
 		}
 	},
 	
-	checkPath: function()
+	checkPath: function(callx, cally)
 	{
-		if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
+		if((callx == this.source.x && cally == this.source.y) || (callx == this.dest.x && cally == this.dest.y))
 		{
-			this.connected = true;
+			if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
+			{
+				this.connected = true;
+			}
+			else if(this.dest.x < game.pipeDream.gridWidth && this.dest.x >= 0 && this.dest.y < game.pipeDream.gridHeight && this.dest.y >= 0 && game.pipeDream.pipeTiles[(this.dest.y * 9) + this.dest.x].connected == true)
+			{
+				if(this.dir == 0) this.setDir(3);
+				else if(this.dir == 1) this.setDir(2);
+				else if(this.dir == 2) this.setDir(1);
+				else if(this.dir == 3) this.setDir(0);
+				this.connected = true;
+			}
+			if(this.connected == true)
+			{
+				var pathContinues = false;
+				if(callx == this.dest.x && cally == this.dest.y)
+				{
+					pathContinues = game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+					if(this.full == true && pathContinues == true) game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].flowing = true;
+				}
+				else
+				{
+					pathContinues = game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+					if(this.full == true && pathContinues == true) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].flowing = true;
+				}
+				return true;
+			}
 		}
-		else if(this.dest.x < game.pipeDream.gridWidth && this.dest.x >= 0 && this.dest.y < game.pipeDream.gridHeight && this.dest.y >= 0 && game.pipeDream.pipeTiles[(this.dest.y * 9) + this.dest.x].connected == true)
-		{
-			if(this.dir == 0) setDir(3);
-			else if(this.dir == 1) setDir(2);
-			else if(this.dir == 2) setDir(1);
-			else if(this.dir == 3) setDir(0);
-			this.connected = true;
-		}
-		if(this.connected == true)
-		{
-			game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath();
-		}
+		this.connected = false;
+		return false;
 	},
 	
 }

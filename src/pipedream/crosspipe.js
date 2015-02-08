@@ -38,15 +38,15 @@ crossPipe.prototype = {
 	
 	setDir: function(set)
 	{
-		this.pipe1.setDir(set);
-		this.pipe2.setDir(set);
-		this.pipe2.rotate();
+		//this.pipe1.setDir(set);
+		//this.pipe2.setDir(set);
+		//this.pipe2.rotate();
 	},
 	
-	checkPath: function()
+	checkPath: function(callx, cally)
 	{
-		this.pipe1.checkPath();
-		this.pipe2.checkPath();
+		this.pipe1.checkPath(callx, cally);
+		this.pipe2.checkPath(callx, cally);
 	},
 	
 }

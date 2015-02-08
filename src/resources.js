@@ -79,6 +79,9 @@ var Resources = function() {
 	this.level_complete = new Image(1280, 320);
 	this.level_complete.src = "images/LevelComplete.png";
 	
+	this.end = new Image (1280, 320);
+	this.end.src = "images/End.png";
+	
 	//Sound effects
 	
 	this.die_scream = new Audio();

@@ -143,12 +143,16 @@ endPipe.prototype = {
 		}
 	},
 	
-	checkPath: function()
+	checkPath: function(callx, cally)
 	{
-		if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
+		if(callx == this.source.x && cally == this.source.y)
 		{
-			this.connected = true;
-			//console.log("Connection Made");
+			if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
+			{
+				this.connected = true;
+				//console.log("Connection Made");
+			}
+			//else console.log("no connection made");
 		}
 	},
 	

@@ -34,7 +34,7 @@ var Game = function (canvasId) {
 	this.masher = new Masher(this);
 	this.cutscene = new Cutscene(this);
 	
-	this.mode = "Cutscene";
+	this.mode = "Towers";
 	//Cutscene
 	//Pipes
 	//Towers
@@ -166,8 +166,11 @@ Game.prototype = {
 			var grX = Math.floor(mouseHitbox.x / this.pipeDream.cellWidth);
 			var grY = Math.floor(mouseHitbox.y / this.pipeDream.cellHeight);
 			
-			this.pipeDream.pipeTiles[grX + grY * this.pipeDream.gridWidth].rotate();
-			this.pipeDream.checkPath();
+			if(this.pipeDream.pause == false)
+			{
+				this.pipeDream.pipeTiles[grX + grY * this.pipeDream.gridWidth].rotate();
+				this.pipeDream.checkPath();
+			}
 		}
 		
 		for (var i = 0; i < this.towers.length; i++) {

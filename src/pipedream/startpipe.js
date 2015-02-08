@@ -16,7 +16,7 @@ var startPipe = function(width, height, game)
 	this.connected = true;
 	this.flowing = true;
 	this.full = false;
-	this.timer = 300;
+	this.timer = 600;
 }
 
 startPipe.prototype = {
@@ -69,7 +69,7 @@ startPipe.prototype = {
 			{
 				var pathContinues = this.checkPath();
 				if(pathContinues) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].flowing = true;
-				else console.log("game over!");
+				else game.pipeDream.gameOver();
 				this.full = false;
 			}
 		}

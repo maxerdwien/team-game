@@ -179,12 +179,20 @@ straightPipe.prototype = {
 				if(callx == this.dest.x && cally == this.dest.y)
 				{
 					pathContinues = game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
-					if(this.full == true && pathContinues == true) game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].flowing = true;
+					if(this.full == true)
+					{
+						if(pathContinues == true) game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].flowing = true;
+						else game.pipeDream.gameOver();
+					}
 				}
 				else
 				{
 					pathContinues = game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
-					if(this.full == true && pathContinues == true) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].flowing = true;
+					if(this.full == true)
+					{
+						if(pathContinues == true) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].flowing = true;
+						else game.pipeDream.gameOver();
+					}
 				}
 				return true;
 			}

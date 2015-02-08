@@ -67,7 +67,7 @@ startPipe.prototype = {
 			}
 			if(this.full == true)
 			{
-				var pathContinues = this.checkPath();
+				var pathContinues = game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
 				if(pathContinues) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].flowing = true;
 				else game.pipeDream.gameOver();
 				this.full = false;
@@ -134,7 +134,7 @@ startPipe.prototype = {
 	
 	checkPath: function()
 	{
-		return game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+		return false;
 	},
 	
 }

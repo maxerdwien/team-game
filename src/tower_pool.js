@@ -20,6 +20,7 @@ Tower_pool.prototype = {
 	},
 	
 	addTower: function(tower) {
+		resources.turret_get.play();
 		tower.x = 576;
 		tower.y = 512 - this.pool.length*64;
 		this.pool.push(tower);

@@ -6,24 +6,23 @@ var endPipe = function(x, y, gx, gy, width, height, game)
 	this.gridy = gy;
 	this.spritex = 0;
 	this.spritey = 0;
-	this.turret = new Bullet_tower(x, y);
+	var rand = Math.floor(Math.random() * 3);
+	if(rand == 0) this.turret = new Bullet_tower(x, y);
+	if(rand == 1) this.turret = new Laser_tower(x, y);
+	if(rand == 2) this.turret = new Zappy_tower(x, y);
 	this.source = { x: this.gridx, y: this.gridy+1 };
 	this.width = width;
 	this.height = height;
 	this.game = game;
 	this.dir = 0;
 	this.connected = false;
+	this.flowing = false;
 }
 
 endPipe.prototype = {
 	render: function(context)
 	{
 		context.save();
-		if(this.test == true)
-		{
-			context.fillStyle = "blue";
-			context.fillRect(this.x, this.y, this.width, this.height);
-		}
 		if(this.dir == 0)
 		{
 			context.drawImage(resources.pipes_sprite_sheet,
@@ -87,7 +86,13 @@ endPipe.prototype = {
 	
 	update: function()
 	{
-		
+		if(this.flowing == true)
+		{
+			this.spritex += (64 * 17);
+			game.towers.push(this.turret);
+			game.tp.addTower(this.turret);
+			game.pipeDream.won = true;
+		}
 	},
 	
 	rotate: function()
@@ -147,15 +152,14 @@ endPipe.prototype = {
 	{
 		if(callx == this.source.x && cally == this.source.y)
 		{
-			if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
+			if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true && game.pipeDream.won == false)
 			{
 				this.connected = true;
-				game.towers.push(this.turret);
-				game.tp.addTower(this.turret);
-				game.pipeDream.won = true;
 				//console.log("Connection Made");
+				return true;
 			}
 			//else console.log("no connection made");
+			return false;
 		}
 	},
 	

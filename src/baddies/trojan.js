@@ -11,7 +11,7 @@ var Trojan = function(x, y, path) {
 	
 	this.dead = false;
 	
-	this.attack = 5;
+	this.attack = 4;
 	
 	this.right_foot = true;
 	
@@ -77,6 +77,10 @@ Trojan.prototype.render = function(ctx) {
 	if (this.walk_direction == 0 || this.walk_direction == 2) {
 		this.spritex += 768;
 	}
+	if (this.walk_direction == 2) {
+		ctx.translate(2*(this.x+32), 0);
+		ctx.scale(-1, 1);
+	}
 	ctx.drawImage(this.image, this.spritex, this.spritey, 64, 64,
 		this.x, this.y, 64, 64);
 	ctx.restore();
@@ -91,5 +95,8 @@ Trojan.prototype.hurt = function(damage) {
 	}
 	if (this.health <= 0) {
 		this.dead = true;
+		var chance = Math.random()*100;
+		if (chance < 5) resources.wilhelm_scream.play();
+		else resources.die_scream.play();
 	}
 }

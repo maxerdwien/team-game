@@ -181,7 +181,11 @@ straightPipe.prototype = {
 				var pathContinues = false;
 				if(callx == this.dest.x && cally == this.dest.y)
 				{
-					pathContinues = game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+					if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0)
+					{
+						pathContinues = game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+					}
+					else pathContinues = false;
 					if(this.full == true)
 					{
 						if(pathContinues == true) game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].flowing = true;
@@ -190,7 +194,11 @@ straightPipe.prototype = {
 				}
 				else
 				{
-					pathContinues = game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+					if(this.dest.x < game.pipeDream.gridWidth && this.dest.x >= 0 && this.dest.y < game.pipeDream.gridHeight && this.dest.y >= 0)
+					{
+						pathContinues = game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+					}
+					else pathContinues = false;
 					if(this.full == true)
 					{
 						if(pathContinues == true) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].flowing = true;

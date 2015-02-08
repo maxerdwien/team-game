@@ -84,6 +84,12 @@ var Resources = function() {
 	this.td_start = new Audio();
 	this.td_start.src = "sfx/131006__shot846__robot-letsrock-by-shot846.wav";
 	
+	this.turret_get = new Audio();
+	this.turret_get.src = "sfx/TurretPickup.wav";
+	
+	this.alarm = new Audio();
+	this.alarm.src = "sfx/Alarm.wav";
+	
 	//Music
 	
 	this.td_music = new Audio();

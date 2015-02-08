@@ -81,6 +81,7 @@ Masher.prototype = {
 				context.restore();
 			}
 		}
+		if (this.detected) resources.alarm.play();
 		if ((this.detected && this.counter == 180) || this.alert)
 		{
 			context.drawImage(resources.intruder_alert, 0, 0, 320, 320, 480, 192, 320, 320);

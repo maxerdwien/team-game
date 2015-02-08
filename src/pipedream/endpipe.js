@@ -155,6 +155,7 @@ endPipe.prototype = {
 			if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true && game.pipeDream.won == false)
 			{
 				this.connected = true;
+				game.pipeDream.speedFlow();
 				//console.log("Connection Made");
 				return true;
 			}

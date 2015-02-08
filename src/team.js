@@ -52,7 +52,7 @@ var Game = function (canvasId) {
 	this.mana = new Mana_pool();
 	
 	// add td stuff
-	this.level = new TD_level(0);
+	this.level = new TD_level(4);
 	
 	this.cd = new Collision_detector();
 	
@@ -62,19 +62,6 @@ var Game = function (canvasId) {
 	//this.baddies.push(new Worm(640, -64, this.level.path));
 	
 	this.towers = [];
-	this.towers.push(new Bullet_tower(0,0));
-	this.towers.push(new Laser_tower(0,0));
-	this.towers.push(new Zappy_tower(0,0));
-	this.towers.push(new Bullet_tower(0,0));
-	this.towers.push(new Laser_tower(0,0));
-	this.towers.push(new Zappy_tower(0,0));
-	
-	this.tp.addTower(this.towers[0]);
-	this.tp.addTower(this.towers[1]);
-	this.tp.addTower(this.towers[2]);
-	this.tp.addTower(this.towers[3]);
-	this.tp.addTower(this.towers[4]);
-	this.tp.addTower(this.towers[5]);
 	
 	this.screen.onmousedown = function(e) { self.mousedown(e) };
 	this.screen.onmousemove = function(e) { self.mousemove(e) };
@@ -127,7 +114,7 @@ Game.prototype = {
 			for (var i = 0; i < this.baddies.length; i++) {
 				this.baddies[i].update(elapsedTime);
 				if (this.baddies[i].dead) {
-					// check it it's a trojan
+					// check if it's a trojan
 					if (this.baddies[i].spritey == 128) {
 						var newGuy = new Virus(this.baddies[i].x, this.baddies[i].y, this.level.path);
 						newGuy.pixels_traveled = this.baddies[i].pixels_traveled;

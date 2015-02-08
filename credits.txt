@@ -1,0 +1,3 @@
+Laser, Bullet, TurretPickup sound effects made using bfxr
+
+All other music and sounds from freesound.org

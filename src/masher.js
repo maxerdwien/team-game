@@ -8,7 +8,7 @@ var Masher = function(game)
 	this.x = 0;
 	this.detected = false;
 	this.alert = false;
-	this.counter = 58//180;
+	this.counter = 320
 	this.secondCounter = 900;
 	window.onkeyup = function (e) { self.keyUp(e); };
 }

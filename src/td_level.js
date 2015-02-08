@@ -24,64 +24,32 @@ var TD_level = function() {
 		console.log("ouch!");
 	}
 	
-	this.tileproperties = {
-		"0":
-		{
-		"buildable":"false",
-		"path":"true"
-		},
-		"1":
-		{
-		"buildable":"false",
-		"path":"true"
-		},
-		"10":
-		{
-		"buildable":"true",
-		"path":"false"
-		},
-		"11":
-		{
-		"buildable":"false",
-		"path":"true"
-		},
-		"2":
-		{
-		"buildable":"false",
-		"path":"true"
-		},
-		"3":
-		{
-		"buildable":"false",
-		"path":"true"
-		},
-		"4":
-		{
-		"buildable":"false",
-		"path":"true"
-		},
-		"5":
-		{
-		"buildable":"false",
-		"path":"true"
-		},
-		"6":
-		{
-		"buildable":"true",
-		"path":"false"
-		},
-		"8":
-		{
-		"buildable":"true",
-		"path":"false"
-		},
-		"9":
-		{
-		"buildable":"true",
-		"path":"false"
+	this.tileproperties = [
+		{},
+		{buildable: false, path: true},
+		{buildable: false, path: true},
+		{buildable: false, path: true},
+		{buildable: false, path: true},
+		{buildable: false, path: true},
+		{buildable: false, path: true},
+		{buildable: true, path: false},
+		{buildable: true, path: false},
+		{buildable: true, path: false},
+		{buildable: true, path: false},
+		{buildable: true, path: false},
+		{buildable: false, path: true}];
+	
+	this.noBuildZones = [];
+	for (var i = 0; i < this.data.length; i++) {
+		var num = this.data[i];
+		if (this.tileproperties[num] != undefined) {
+			if (!this.tileproperties[num].buildable) {
+				this.noBuildZones.push({x:640+(i % this.width)*64, y:64*Math.floor(i/this.width)});
+			}
 		}
-	};
-		
+	}
+	
+	this.done_spawning = false;
 }
 
 TD_level.prototype = {
@@ -106,6 +74,8 @@ TD_level.prototype = {
 				this.spawn_index++;
 				
 			}
+		} else {
+			this.done_spawning = true;
 		}
 	},
 	
@@ -113,9 +83,15 @@ TD_level.prototype = {
 		ctx.save();
 		for (var i = 0; i < this.data.length; i++) {
 			var img = this.data[i];
-			ctx.drawImage(resources.tower_defense_sprite_sheet,
-				64*(this.data[i]-1), 0, 64, 64,
+			// upper right corner
+			if (i == this.width-1) {
+				ctx.drawImage(resources.wave_sprite_sheet, 0, 0, 64, 64,
 				640+(i % this.width)*64, 64*Math.floor(i/this.width), 64, 64);
+			} else {
+				ctx.drawImage(resources.tower_defense_sprite_sheet,
+					64*(this.data[i]-1), 0, 64, 64,
+					640+(i % this.width)*64, 64*Math.floor(i/this.width), 64, 64);
+			}
 		}
 		ctx.restore();
 	}

@@ -94,6 +94,10 @@ Game.prototype = {
 			for (var i = 0; i < this.baddies.length; i++) {
 				this.baddies[i].update(elapsedTime);
 				if (this.baddies[i].dead) {
+					// check it it's a trojan
+					if (this.baddies[i].spritey == 128) {
+						this.baddies.push(new Virus(this.baddies[i].x, this.baddies[i].y, this.level.path));
+					}
 					this.baddies.splice(i, 1);
 					i--;
 				}
@@ -161,13 +165,27 @@ Game.prototype = {
 		if (this.dragging != null) {
 			this.dragging.x = 64*Math.floor((this.mousex)/64);
 			this.dragging.y = 64*Math.floor((this.mousey)/64);
+			
 		}
 	},
 	
 	mouseup: function(e) {
 		if (this.dragging != null) {
-			if (this.dragging.x >= 640) {
-				this.dragging.mode = "deployed";
+			if (this.dragging.x >= 640 && this.dragging.y < 576) {
+				var restricted = false;
+				for (var i = 0; i < this.level.noBuildZones.length; i++) {
+					if (this.dragging.x == this.level.noBuildZones[i].x &&
+						this.dragging.y == this.level.noBuildZones[i].y) {
+						restricted = true;
+					}
+				}
+				if (restricted) {
+					this.dragging.mode = "ready";
+				} else {
+					this.dragging.mode = "deployed";
+					var newNoBuild = {x: this.dragging.x, y: this.dragging.y };
+					this.level.noBuildZones.push(newNoBuild);
+				}
 			} else {
 				this.dragging.mode = "ready";
 			}

@@ -7,7 +7,6 @@ var endPipe = function(x, y, gx, gy, width, height, game)
 	this.spritex = 0;
 	this.spritey = 0;
 	this.turret = new Bullet_tower(x, y);
-	game.towers.push(this.turret);
 	this.source = { x: this.gridx, y: this.gridy+1 };
 	this.width = width;
 	this.height = height;
@@ -151,7 +150,9 @@ endPipe.prototype = {
 			if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
 			{
 				this.connected = true;
+				game.towers.push(this.turret);
 				game.tp.addTower(this.turret);
+				game.pipeDream.won = true;
 				//console.log("Connection Made");
 			}
 			//else console.log("no connection made");

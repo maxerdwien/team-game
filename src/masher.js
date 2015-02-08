@@ -162,7 +162,12 @@ Masher.prototype = {
 				this.x = 0;
 			}
 			this.progress++;
-			if (this.progress == 10) this.detected = true; 
+			if (this.progress == 10) 
+			{
+				this.detected = true; 
+				game.towers.push(new Bullet_tower(0,0));
+				game.tp.addTower(game.towers[game.towers.length-1]);
+			}
 			if (this.progress == 150) 
 			{
 				console.log("Level one bonus achieved!");

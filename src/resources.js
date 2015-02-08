@@ -73,6 +73,12 @@ var Resources = function() {
 	this.ranges_sprite_sheet = new Image(576, 256);
 	this.ranges_sprite_sheet.src = "images/Ranges v2.png";
 	
+	this.game_over = new Image(1280, 320);
+	this.game_over.src = "images/GameOver.png";
+	
+	this.level_complete = new Image(1280, 320);
+	this.level_complete.src = "images/LevelComplete.png";
+	
 	//Sound effects
 	
 	this.die_scream = new Audio();

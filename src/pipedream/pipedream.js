@@ -18,7 +18,8 @@ PipeDream.prototype = {
 	render: function(context)
 	{
 		context.save();
-		context.fillStyle="black";
+		// matches grey of TD background
+		context.fillStyle = "rgb(84,85,75)";
 		context.fillRect(0, 0, this.screenWidth, this.screenHeight);
 		this.pipeTiles.forEach( function(tile) {
 			tile.render(context);
@@ -63,11 +64,14 @@ PipeDream.prototype = {
 	{
 		this.pipeTiles.length = 0;
 		this.pipeTiles.push(new startPipe(this.cellWidth, this.cellHeight, game));
-		var pathLength = (Math.floor(Math.random() * 40) + 15) % 30;
+		
+		// create a path to one of the towers, so the game is winnable
+		var pathLength = (Math.floor(Math.random() * 40) % 15) + 15;
 		var lastpt = { x: 0, y: 0 }
 		var curpt = { x: 0, y: 1 }
 		var nxtpt = { x: 0, y: 1 }
-		this.pipeTiles[curpt.x + curpt.y * this.gridWidth] = this.pipeTiles[curpt.x + curpt.y * this.gridWidth] = new straightPipe(curpt.x * this.cellWidth, curpt.y * this.cellHeight, curpt.x, curpt.y, this.cellWidth, this.cellHeight,game);
+		this.pipeTiles[curpt.x + curpt.y * this.gridWidth] =
+			new straightPipe(curpt.x * this.cellWidth, curpt.y * this.cellHeight, curpt.x, curpt.y, this.cellWidth, this.cellHeight,game);
 		while(pathLength > 0)
 		{
 			var rng = Math.floor(Math.random() * 4);
@@ -87,7 +91,7 @@ PipeDream.prototype = {
 				nxtpt.x = curpt.x;
 				nxtpt.y = curpt.y + 1;
 			}
-			else if(rng == 3 && curpt.y > 0 && curpt.x < this.gridHeight && this.pipeTiles[(curpt.x)+((curpt.y - 1) * this.gridWidth)] == undefined)
+			else if(rng == 3 && curpt.y > 0 && curpt.y < this.gridHeight && this.pipeTiles[(curpt.x)+((curpt.y - 1) * this.gridWidth)] == undefined)
 			{
 				nxtpt.x = curpt.x;
 				nxtpt.y = curpt.y - 1;
@@ -102,11 +106,27 @@ PipeDream.prototype = {
 				curpt.y = nxtpt.y;
 			}
 		}
+		
+		// cap off the path with the tower pipe
 		this.pipeTiles[curpt.x + curpt.y * this.gridWidth] = new endPipe(curpt.x * this.cellWidth, curpt.y * this.cellHeight, curpt.x, curpt.y, this.cellWidth, this.cellHeight, game);
 		if(lastpt.x < curpt.x)  this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(1);
 		else if(lastpt.x > curpt.x) this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(2);
 		else if(lastpt.y < curpt.y) this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(0);
 		else this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(3);
+		
+		// fill in the rest of the map randomly
+		var numEnds = 3;
+		while(numEnds > 0)
+		{
+			var x = Math.floor(Math.random() * 9);
+			var y = Math.floor(Math.random() * 9);
+			if(this.pipeTiles[x + y * this.gridWidth] == undefined)
+			{
+				this.pipeTiles[x + y * this.gridWidth] = new endPipe(x * this.cellWidth, y * this.cellHeight, x, y, this.cellWidth, this.cellHeight, game);
+				this.pipeTiles[x + y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
+				numEnds--;
+			}
+		}
 		
 		for(var i = 0; i < this.gridHeight; i++)
 		{

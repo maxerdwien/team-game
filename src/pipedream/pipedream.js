@@ -97,8 +97,6 @@ PipeDream.prototype = {
 				nxtpt.y = curpt.y - 1;
 			}
 			pathLength--;
-			console.log("tried direction", rng);
-			console.log("remaining:", pathLength);
 			if(nxtpt.x != curpt.x || nxtpt.y != curpt.y)
 			{
 				this.determineTile(lastpt, curpt, nxtpt);

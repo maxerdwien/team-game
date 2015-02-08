@@ -83,7 +83,7 @@ Game.prototype = {
 		{
 			this.cutscene.update();
 		}
-		else if (this.mode == "Towers" && (this.level.done_spawning && this.baddies.length == 0) && this.levelNumber < 5)
+		else if (this.mode == "Towers" && (this.level.done_spawning && this.baddies.length == 0) && this.levelNumber < 4)
 		{
 			if (this.timer == 10000) this.timer = this.elapsedTime * 200;
 			else if ((this.timer - this.elapsedTime) > 0) this.timer -= this.elapsedTime;
@@ -93,11 +93,12 @@ Game.prototype = {
 				this.tp.pool = [];
 				this.timer = 10000;
 				this.mode = "Mashing";
+				this.mana = new Mana_pool();
 				this.towers = [];
 				this.level = new TD_level(this.levelNumber);
 			}
 		}
-		else if (this.mode == "Towers" && (this.level.done_spawning && this.baddies.length == 0) && this.levelNumber >= 5) this.mode = "Cutscene";
+		else if (this.mode == "Towers" && (this.level.done_spawning && this.baddies.length == 0) && this.levelNumber >= 4) this.mode = "Cutscene";
 		else if (this.mode == "Towers")
 		{
 			this.pipeDream.update();

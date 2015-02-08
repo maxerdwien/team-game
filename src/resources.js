@@ -30,8 +30,11 @@ var Resources = function() {
 	this.mana_sprite_sheet.src = "images/ManaBar v6.png";
 	
 	// masher sprites
+	this.masher_start = new Image(480, 320);
+	this.masher_start.src = "images/MasherStart.png";
+	
 	this.intruder_alert = new Image(320, 320);
-	this.intruder_alert.src = "images/IntruderAlert v1.png";
+	this.intruder_alert.src = "images/IntruderAlert v2.png";
 	
 	this.masher_game_over = new Image(320, 320);
 	this.masher_game_over.src = "images/MasherGameOver v1.png";

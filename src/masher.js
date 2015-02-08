@@ -82,7 +82,7 @@ Masher.prototype = {
 			}
 		}
 		if (this.detected) resources.alarm.play();
-		if ((this.detected && this.counter == 180) || this.alert)
+		if (((this.detected && this.counter == 180) || this.alert) && this.secondCounter > 0 && this.counter > 0)
 		{
 			context.fillStyle="black";
 			context.fillRect(480, 192, 480, 320);
@@ -162,7 +162,12 @@ Masher.prototype = {
 				this.x = 0;
 			}
 			this.progress++;
-			if (this.progress == 10) this.detected = true; 
+			if (this.progress == 10) 
+			{
+				this.detected = true; 
+				game.towers.push(new Bullet_tower(0,0));
+				game.tp.addTower(game.towers[game.towers.length-1]);
+			}
 			if (this.progress == 150) 
 			{
 				console.log("Level one bonus achieved!");

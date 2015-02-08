@@ -84,11 +84,19 @@ Masher.prototype = {
 		if (this.detected) resources.alarm.play();
 		if ((this.detected && this.counter == 180) || this.alert)
 		{
-			context.drawImage(resources.intruder_alert, 0, 0, 320, 320, 480, 192, 320, 320);
+			context.fillStyle="black";
+			context.fillRect(480, 192, 480, 320);
+			context.drawImage(resources.intruder_alert, 0, 0, 480, 320, 480, 192, 480, 320);
 			if (this.counter == 180) this.alert = true;
 			this.counter--;
 			this.secondCounter--;
 			if (this.counter == 0) this.alert = false;
+		}
+		if (this.progress == 0) 
+		{
+			context.fillStyle="black";
+			context.fillRect(480, 192, 480, 320);
+			context.drawImage(resources.masher_start, 0, 0, 480, 320, 480, 192, 480, 320);
 		}
 		else if (this.detected)
 		{

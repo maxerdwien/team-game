@@ -57,6 +57,7 @@ Zappy_tower.prototype.update = function(elapsedTime) {
 			for (var i = 0; i < game.baddies.length; i++) {
 				if (game.cd.detect(this.getRange(), game.baddies[i].getHitbox())) {
 					game.baddies[i].hurt(this.damage*elapsedTime);
+					resources.zap_fire.play();
 				}
 			}
 			this.zap_sprite_cooldown -= elapsedTime;

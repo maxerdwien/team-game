@@ -91,5 +91,8 @@ Trojan.prototype.hurt = function(damage) {
 	}
 	if (this.health <= 0) {
 		this.dead = true;
+		var chance = Math.random()*100;
+		if (chance < 5) resources.wilhelm_scream.play();
+		else resources.die_scream.play();
 	}
 }

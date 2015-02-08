@@ -45,6 +45,7 @@ Bullet_tower.prototype.update = function(elapsedTime) {
 				game.cd.detect(this.getRange(), game.baddies[i].getHitbox())) {
 				this.pointAt(game.baddies[i]);
 				game.baddies[i].hurt(this.damage);
+				resources.bullet_fire.play();
 				this.cannon_ready = false;
 				this.firing = true;
 				break;

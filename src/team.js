@@ -34,7 +34,7 @@ var Game = function (canvasId) {
 	this.masher = new Masher(this);
 	this.cutscene = new Cutscene(this);
 	
-	this.mode = "Cutscene";
+	this.mode = "Towers";
 	//Cutscene
 	//Pipes
 	//Towers
@@ -49,7 +49,7 @@ var Game = function (canvasId) {
 	this.mana = new Mana_pool();
 	
 	// add td stuff
-	this.level = new TD_level(4);
+	this.level = new TD_level(0);
 	
 	this.cd = new Collision_detector();
 	
@@ -62,9 +62,16 @@ var Game = function (canvasId) {
 	this.towers.push(new Bullet_tower(0,0));
 	this.towers.push(new Laser_tower(0,0));
 	this.towers.push(new Zappy_tower(0,0));
+	this.towers.push(new Bullet_tower(0,0));
+	this.towers.push(new Laser_tower(0,0));
+	this.towers.push(new Zappy_tower(0,0));
+	
 	this.tp.addTower(this.towers[0]);
 	this.tp.addTower(this.towers[1]);
 	this.tp.addTower(this.towers[2]);
+	this.tp.addTower(this.towers[3]);
+	this.tp.addTower(this.towers[4]);
+	this.tp.addTower(this.towers[5]);
 	
 	this.screen.onmousedown = function(e) { self.mousedown(e) };
 	this.screen.onmousemove = function(e) { self.mousemove(e) };
@@ -76,7 +83,7 @@ Game.prototype = {
 	// Update the game world.  See
 	// http://gameprogrammingpatterns.com/update-method.html
 	update: function(elapsedTime) {
-	console.log(this.mode);
+		console.log(this.mode);
 		if (this.mode == "Cutscene")
 		{
 			this.cutscene.update();
@@ -128,8 +135,6 @@ Game.prototype = {
 			this.backBufferContext.fillStyle="white";
 			this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
 			
-			this.mana.render(this.backBufferContext);
-			
 			this.level.render(this.backBufferContext);
 			
 			for (var i = 0; i < this.baddies.length; i++) {
@@ -141,6 +146,8 @@ Game.prototype = {
 			for (var i = 0; i < this.towers.length; i++) {
 				this.towers[i].render(this.backBufferContext);
 			}
+			
+			this.mana.render(this.backBufferContext);
 			
 			this.pipeDream.render(this.backBufferContext);
 		}

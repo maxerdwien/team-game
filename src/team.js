@@ -52,7 +52,7 @@ var Game = function (canvasId) {
 	this.mana = new Mana_pool();
 	
 	// add td stuff
-	this.level = new TD_level(0);
+	this.level = new TD_level(1);
 	
 	this.cd = new Collision_detector();
 	

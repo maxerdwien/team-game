@@ -15,7 +15,7 @@ Cutscene.prototype = {
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.screen1, 0, 0, 1280, 320, 0, 160, 1280, 320);
 				this.counter++;
-				if (this.counter >= 600) //change to 600 or maybe 500
+				if (this.counter >= 60) //change to 700
 				{
 					this.counter = 0;
 					this.currentScene++;
@@ -26,7 +26,7 @@ Cutscene.prototype = {
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.screen2, 0, 0, 1280, 320, 0, 160, 1280, 320);
 				this.counter++;
-				if (this.counter >= 600) //change to 600 or maybe 500
+				if (this.counter >= 60) //change to 700
 				{
 					this.counter = 0;
 					this.currentScene++;
@@ -37,7 +37,7 @@ Cutscene.prototype = {
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.screen3, 0, 0, 1280, 320, 0, 160, 1280, 320);
 				this.counter++;
-				if (this.counter >= 600) //change to 600 or maybe 500
+				if (this.counter >= 60) //change to 700
 				{
 					this.counter = 0;
 					this.currentScene++;
@@ -52,7 +52,7 @@ Cutscene.prototype = {
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.prelevel1, 0, 0, 1280, 320, 0, 160, 1280, 320);
 				this.counter++;
-				if (this.counter >= 600) //change to 600 or maybe 500
+				if (this.counter >= 300) //change to 300
 				{
 					this.counter = 0;
 					this.currentScene++;
@@ -63,7 +63,7 @@ Cutscene.prototype = {
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.prelevel2, 0, 0, 1280, 320, 0, 160, 1280, 320);
 				this.counter++;
-				if (this.counter >= 600) //change to 600 or maybe 500
+				if (this.counter >= 300) //change to 300
 				{
 					this.counter = 0;
 					this.currentScene++;
@@ -74,7 +74,7 @@ Cutscene.prototype = {
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.prelevel3, 0, 0, 1280, 320, 0, 160, 1280, 320);
 				this.counter++;
-				if (this.counter >= 600) //change to 600 or maybe 500
+				if (this.counter >= 300) //change to 300
 				{
 					this.counter = 0;
 					this.currentScene++;

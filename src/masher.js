@@ -127,8 +127,15 @@ Masher.prototype = {
 		}
 		else if (this.secondCounter <= 0)
 		{
-			console.log(game.mode);
 			game.mode = "Cutscene";
+			this.progress = 0;
+			this.completed = [];
+			this.y = 0;
+			this.x = 0;
+			this.detected = false;
+			this.alert = false;
+			this.counter = 180;
+			this.secondCounter = 900;
 		}
 	},
 	

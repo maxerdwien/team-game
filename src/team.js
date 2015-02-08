@@ -34,7 +34,7 @@ var Game = function (canvasId) {
 	this.masher = new Masher(this);
 	this.cutscene = new Cutscene(this);
 	
-	this.mode = "Cutscene";
+	this.mode = "Towers";
 	//Cutscene
 	//Pipes
 	//Towers
@@ -83,9 +83,7 @@ Game.prototype = {
 	// Update the game world.  See
 	// http://gameprogrammingpatterns.com/update-method.html
 	update: function(elapsedTime) {
-		
 		console.log(this.mode);
-		
 		if (this.mode == "Cutscene")
 		{
 			this.cutscene.update();
@@ -140,8 +138,6 @@ Game.prototype = {
 			this.backBufferContext.fillStyle="white";
 			this.backBufferContext.fillRect(0, 0, WIDTH, HEIGHT);
 			
-			this.mana.render(this.backBufferContext);
-			
 			this.level.render(this.backBufferContext);
 			
 			for (var i = 0; i < this.baddies.length; i++) {
@@ -153,6 +149,8 @@ Game.prototype = {
 			for (var i = 0; i < this.towers.length; i++) {
 				this.towers[i].render(this.backBufferContext);
 			}
+			
+			this.mana.render(this.backBufferContext);
 			
 			this.pipeDream.render(this.backBufferContext);
 		}

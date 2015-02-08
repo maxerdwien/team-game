@@ -48,6 +48,8 @@ var TD_level = function() {
 			}
 		}
 	}
+	
+	this.done_spawning = false;
 }
 
 TD_level.prototype = {
@@ -72,6 +74,8 @@ TD_level.prototype = {
 				this.spawn_index++;
 				
 			}
+		} else {
+			this.done_spawning = true;
 		}
 	},
 	

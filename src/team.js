@@ -88,6 +88,10 @@ Game.prototype = {
 		for (var i = 0; i < this.baddies.length; i++) {
 			this.baddies[i].update(elapsedTime);
 			if (this.baddies[i].dead) {
+				// check it it's a trojan
+				if (this.baddies[i].spritey == 128) {
+					this.baddies.push(new Virus(this.baddies[i].x, this.baddies[i].y, this.level.path));
+				}
 				this.baddies.splice(i, 1);
 				i--;
 			}

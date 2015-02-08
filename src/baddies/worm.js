@@ -19,12 +19,12 @@ var Worm = function(x, y, path) {
 	this.damage_level = 0;
 	
 	// milliseconds to travel one large pixel
-	this.millis_per_pixel = 15;
+	this.millis_per_pixel = 16;
 	
 	this.millis_saved = 0;
 	this.pixels_traveled = 0;
 	
-	this.max_health = 110;
+	this.max_health = 90;
 	this.health = this.max_health;
 	
 	// milliseconds

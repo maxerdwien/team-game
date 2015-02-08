@@ -153,7 +153,7 @@ Masher.prototype = {
 	},
 	
 	keyUp: function(e) {
-		if (this.secondCounter > 0)
+		if (this.secondCounter > 0 && game.mode == "Mashing")
 		{
 			if (this.x < 1280) this.x += 32;
 			else if (this.y < 640) 

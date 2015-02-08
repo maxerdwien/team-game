@@ -6,7 +6,10 @@ var endPipe = function(x, y, gx, gy, width, height, game)
 	this.gridy = gy;
 	this.spritex = 0;
 	this.spritey = 0;
-	this.turret = new Bullet_tower(x, y);
+	var rand = Math.floor(Math.random() * 3);
+	if(rand == 0) this.turret = new Bullet_tower(x, y);
+	if(rand == 1) this.turret = new Laser_tower(x, y);
+	if(rand == 2) this.turret = new Zappy_tower(x, y);
 	this.source = { x: this.gridx, y: this.gridy+1 };
 	this.width = width;
 	this.height = height;
@@ -152,6 +155,7 @@ endPipe.prototype = {
 			if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true && game.pipeDream.won == false)
 			{
 				this.connected = true;
+				game.pipeDream.speedFlow();
 				//console.log("Connection Made");
 				return true;
 			}

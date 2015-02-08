@@ -33,6 +33,9 @@ var Game = function (canvasId) {
 	this.pipeDream = new PipeDream(this);
 	this.masher = new Masher(this);
 	this.cutscene = new Cutscene(this);
+	this.levelNumber = 0;
+	
+	this.timer = 10000;
 	
 	this.mode = "Cutscene";
 	//Cutscene
@@ -89,8 +92,18 @@ Game.prototype = {
 		}
 		else if (this.mode == "Towers" && (this.level.done_spawning && this.baddies.length == 0))
 		{
-			this.mode = "Mashing";
-			console.log("here");
+			if (this.timer == 10000) this.timer = this.elapsedTime * 200;
+			else if ((this.timer - this.elapsedTime) > 0) this.timer -= this.elapsedTime;
+			else
+			{	
+				this.levelNumber++;
+				this.tp.pool = [];
+				this.timer = 10000;
+				this.mode = "Mashing";
+				this.towers = [];
+				this.level = new TD_level(this.levelNumber);
+			}
+			console.log(this.timer);
 		}
 		else if (this.mode == "Towers")
 		{
@@ -173,6 +186,7 @@ Game.prototype = {
 			if(this.pipeDream.pause == false)
 			{
 				this.pipeDream.pipeTiles[grX + grY * this.pipeDream.gridWidth].rotate();
+				this.pipeDream.pipeTiles[0].flowing = true;
 				this.pipeDream.checkPath();
 			}
 		}

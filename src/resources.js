@@ -63,6 +63,12 @@ var Resources = function() {
 	
 	this.prelevel3 = new Image (1280, 320);
 	this.prelevel3.src = "images/PreLevel3.png";
+	
+	this.prelevel4 = new Image (1280, 320);
+	this.prelevel4.src = "images/PreLevel4.png";
+	
+	this.prelevel5 = new Image (1280, 320);
+	this.prelevel5.src = "images/PreLevel5.png";
 
 	this.ranges_sprite_sheet = new Image(576, 256);
 	this.ranges_sprite_sheet.src = "images/Ranges v2.png";

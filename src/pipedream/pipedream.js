@@ -227,5 +227,12 @@ PipeDream.prototype = {
 	{
 		this.pause = true;
 		this.stopTime = game.gameTime;
+	},
+	
+	speedFlow: function()
+	{
+		this.pipeTiles.forEach( function(tile) {
+			tile.flowspeed = 1;
+		})
 	}
 }

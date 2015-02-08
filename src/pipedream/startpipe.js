@@ -14,9 +14,9 @@ var startPipe = function(width, height, game)
 	this.game = game;
 	this.dir = 0;
 	this.connected = true;
-	this.flowing = true;
+	this.flowing = false;
 	this.full = false;
-	this.timer = 800;
+	this.timer = 11;
 }
 
 startPipe.prototype = {

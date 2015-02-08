@@ -8,7 +8,7 @@ var Bullet_tower = function(x, y) {
 	
 	this.angle = 0;
 	
-	this.damage = 15;
+	this.damage = 17;
 	
 	this.max_cannon_cooldown = 600;
 	this.cannon_cooldown = this.max_cannon_cooldown;

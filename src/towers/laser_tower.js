@@ -9,7 +9,7 @@ var Laser_tower = function(x, y) {
 	// always either 0, pi/2, pi, or 3pi/2
 	this.angle = 0;
 	
-	this.damage = 10;
+	this.damage = 14;
 	
 	this.max_cannon_cooldown = 800;
 	this.cannon_cooldown = this.max_cannon_cooldown;

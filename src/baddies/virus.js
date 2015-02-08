@@ -23,7 +23,7 @@ var Virus = function(x, y, path) {
 	this.millis_saved = 0;
 	this.pixels_traveled = 0;
 	
-	this.max_health = 100;
+	this.max_health = 180;
 	this.health = this.max_health;
 	
 	// milliseconds

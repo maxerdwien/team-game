@@ -52,7 +52,7 @@ var Game = function (canvasId) {
 	this.mana = new Mana_pool();
 	
 	// add td stuff
-	this.level = new TD_level(1);
+	this.level = new TD_level(4);
 	
 	this.cd = new Collision_detector();
 	
@@ -62,19 +62,6 @@ var Game = function (canvasId) {
 	//this.baddies.push(new Worm(640, -64, this.level.path));
 	
 	this.towers = [];
-	this.towers.push(new Bullet_tower(0,0));
-	this.towers.push(new Laser_tower(0,0));
-	this.towers.push(new Zappy_tower(0,0));
-	this.towers.push(new Bullet_tower(0,0));
-	this.towers.push(new Laser_tower(0,0));
-	this.towers.push(new Zappy_tower(0,0));
-	
-	this.tp.addTower(this.towers[0]);
-	this.tp.addTower(this.towers[1]);
-	this.tp.addTower(this.towers[2]);
-	this.tp.addTower(this.towers[3]);
-	this.tp.addTower(this.towers[4]);
-	this.tp.addTower(this.towers[5]);
 	
 	this.screen.onmousedown = function(e) { self.mousedown(e) };
 	this.screen.onmousemove = function(e) { self.mousemove(e) };

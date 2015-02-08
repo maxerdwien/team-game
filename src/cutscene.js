@@ -81,6 +81,28 @@ Cutscene.prototype = {
 					game.mode = "Towers";
 				}
 				break;
+			case 7: context.fillStyle="black";
+				context.fillRect(0, 0, WIDTH, HEIGHT);
+				context.drawImage(resources.prelevel4, 0, 0, 1280, 320, 0, 160, 1280, 320);
+				this.counter++;
+				if (this.counter >= 300) //change to 300
+				{
+					this.counter = 0;
+					this.currentScene++;
+					game.mode = "Towers";
+				}
+				break;
+			case 8: context.fillStyle="black";
+				context.fillRect(0, 0, WIDTH, HEIGHT);
+				context.drawImage(resources.prelevel3, 0, 0, 1280, 320, 0, 160, 1280, 320);
+				this.counter++;
+				if (this.counter >= 300) //change to 300
+				{
+					this.counter = 0;
+					this.currentScene++;
+					game.mode = "Towers";
+				}
+				break;
 		}
 	},
 	

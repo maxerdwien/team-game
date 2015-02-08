@@ -121,7 +121,7 @@ Game.prototype = {
 			for (var i = 0; i < this.baddies.length; i++) {
 				this.baddies[i].update(elapsedTime);
 				if (this.baddies[i].dead) {
-					// check it it's a trojan
+					// check if it's a trojan
 					if (this.baddies[i].spritey == 128) {
 						var newGuy = new Virus(this.baddies[i].x, this.baddies[i].y, this.level.path);
 						newGuy.pixels_traveled = this.baddies[i].pixels_traveled;

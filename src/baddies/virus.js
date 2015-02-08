@@ -18,7 +18,7 @@ var Virus = function(x, y, path) {
 	this.damage_level = 0;
 	
 	// milliseconds to travel one large pixel
-	this.millis_per_pixel = 30;
+	this.millis_per_pixel = 38;
 	
 	this.millis_saved = 0;
 	this.pixels_traveled = 0;

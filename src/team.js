@@ -34,7 +34,7 @@ var Game = function (canvasId) {
 	this.masher = new Masher(this);
 	this.cutscene = new Cutscene(this);
 	
-	this.mode = "Towers";
+	this.mode = "Cutscene";
 	//Cutscene
 	//Pipes
 	//Towers

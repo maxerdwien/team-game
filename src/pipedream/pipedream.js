@@ -25,6 +25,14 @@ PipeDream.prototype = {
 	
 	update: function()
 	{
+		this.pipeTiles.forEach( function(tile)
+		{
+			tile.update();
+		});
+	},
+	
+	checkPath: function()
+	{
 		this.pipeTiles[0].checkPath();
 	},
 	
@@ -82,15 +90,18 @@ PipeDream.prototype = {
 			{
 				if(this.pipeTiles[j + i*this.gridWidth] == undefined)
 				{
-					//this.pipeTiles[j + i*this.gridWidth] = new straightPipe(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game, false);
+					//this.pipeTiles[j + i*this.gridWidth] = new curvePipe(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game, false);
 					//this.pipeTiles[j + i*this.gridWidth].setDir(3);
-					var rng = Math.floor(Math.random() * 3);
-					if(rng == 0) this.pipeTiles[j + i*this.gridWidth] = new straightPipe(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game);
-					else if(rng == 1) this.pipeTiles[j + i*this.gridWidth] = new curvePipe(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game);
-					else if(rng == 2) this.pipeTiles[j + i*this.gridWidth] = new crossPipe(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game);
+					//this.pipeTiles[j + i*this.gridWidth].flip = true;
+					var rng = Math.floor(Math.random() * 5);
+					if(rng < 4) this.pipeTiles[j + i*this.gridWidth] = new curvePipe(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game);
+					else if(rng < 5) this.pipeTiles[j + i*this.gridWidth] = new straightPipe(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game);
+					else this.pipeTiles[j + i*this.gridWidth] = new crossPipe(j * this.cellWidth, i * this.cellHeight, j, i, this.cellWidth, this.cellHeight, game);
+					this.pipeTiles[j + i * this.gridWidth].setDir(Math.floor(Math.random() * 3));
 				}
 			}
 		}
+		//this.update();
 	},
 	
 	determineTile: function(last, current, next)
@@ -98,34 +109,34 @@ PipeDream.prototype = {
 		if(last.x < current.x && next.x > current.x)
 		{
 			this.pipeTiles[current.x + current.y * this.gridWidth] = new straightPipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-			this.pipeTiles[current.x + current.y * this.gridWidth].setDir(2);
+			this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 		}
 		if(last.x > current.x && next.x < current.x)
 		{
 			this.pipeTiles[current.x + current.y * this.gridWidth] = new straightPipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-			this.pipeTiles[current.x + current.y * this.gridWidth].setDir(1);
+			this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 		}
 		if(last.y < current.y && next.y > current.y)
 		{
 			this.pipeTiles[current.x + current.y * this.gridWidth] = new straightPipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-			this.pipeTiles[current.x + current.y * this.gridWidth].setDir(3);
+			this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 		}
 		if(last.y > current.y && next.y < current.y)
 		{
 			this.pipeTiles[current.x + current.y * this.gridWidth] = new straightPipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-			this.pipeTiles[current.x + current.y * this.gridWidth].setDir(0);
+			this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 		}
 		if(last.x < current.x && next.x == current.x)
 		{
 			if(next.y > current.y)
 			{
 				this.pipeTiles[current.x + current.y * this.gridWidth] = new curvePipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(2);
+				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 			}
 			else
 			{
 				this.pipeTiles[current.x + current.y * this.gridWidth] = new curvePipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(3);
+				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 			}
 		}
 		if(last.x > current.x && next.x == current.x)
@@ -133,12 +144,12 @@ PipeDream.prototype = {
 			if(next.y > current.y)
 			{
 				this.pipeTiles[current.x + current.y * this.gridWidth] = new curvePipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(0);
+				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 			}
 			else
 			{
 				this.pipeTiles[current.x + current.y * this.gridWidth] = new curvePipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(1);
+				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 			}
 		}
 		if(last.y < current.y && next.y == current.y)
@@ -146,12 +157,12 @@ PipeDream.prototype = {
 			if(next.x > current.x)
 			{
 				this.pipeTiles[current.x + current.y * this.gridWidth] = new curvePipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(1);
+				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 			}
 			else
 			{
 				this.pipeTiles[current.x + current.y * this.gridWidth] = new curvePipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(3);
+				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 			}
 		}
 		if(last.y > current.y && next.y == current.y)
@@ -159,12 +170,12 @@ PipeDream.prototype = {
 			if(next.x > current.x)
 			{
 				this.pipeTiles[current.x + current.y * this.gridWidth] = new curvePipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(0);
+				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 			}
 			else
 			{
 				this.pipeTiles[current.x + current.y * this.gridWidth] = new curvePipe(current.x * this.cellWidth, current.y * this.cellHeight, current.x, current.y, this.cellWidth, this.cellHeight, game);
-				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(2);
+				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 			}
 		}
 	}

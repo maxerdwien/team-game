@@ -78,7 +78,7 @@ Game.prototype = {
 		this.mana.update(elapsedTime);
 		
 		this.level.update(elapsedTime);
-		this.pipeDream.render(this.backBufferContext);
+		
 		this.pipeDream.update();
 		
 		for (var i = 0; i < this.towers.length; i++) {
@@ -129,6 +129,15 @@ Game.prototype = {
 			y: this.mousey,
 			r: 0
 		};
+		if(mouseHitbox.x < this.pipeDream.screenWidth && mouseHitbox.y < this.pipeDream.screenHeight)
+		{
+			var grX = Math.floor(mouseHitbox.x / this.pipeDream.cellWidth);
+			var grY = Math.floor(mouseHitbox.y / this.pipeDream.cellHeight);
+			
+			this.pipeDream.pipeTiles[grX + grY * this.pipeDream.gridWidth].rotate();
+			this.pipeDream.checkPath();
+		}
+		
 		for (var i = 0; i < this.towers.length; i++) {
 			if (this.towers[i].mode == "ready" &&
 				this.cd.detect(mouseHitbox, this.towers[i].getHitbox())) {

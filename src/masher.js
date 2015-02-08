@@ -127,7 +127,8 @@ Masher.prototype = {
 		}
 		else if (this.secondCounter <= 0)
 		{
-			game.mode = "Pipes";
+			console.log(game.mode);
+			game.mode = "Cutscene";
 		}
 	},
 	

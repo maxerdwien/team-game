@@ -158,27 +158,19 @@ Masher.prototype = {
 				console.log("Level two bonus achieved!");
 				game.towers.push(new Bullet_tower(0,0));
 				game.tp.addTower(game.towers[game.towers.length-1]);
-				game.towers.push(new Bullet_tower(0,0));
-				game.tp.addTower(game.towers[game.towers.length-1]);
 				
 			}
 			if (this.progress == 450)
 			{	
 				console.log("Level three bonus achieved!");
-				game.towers.push(new Bullet_tower(0,0));
-				game.tp.addTower(game.towers[game.towers.length-1]);
-				game.towers.push(new Bullet_tower(0,0));
-				game.tp.addTower(game.towers[game.towers.length-1]);
 				game.towers.push(new Zappy_tower(0,0));
 				game.tp.addTower(game.towers[game.towers.length-1]);
 			}
 			if (this.progress == 600) 
 			{
 				console.log("Level four bonus achieved!");
-				game.towers.push(new Bullet_tower(0,0));
-				game.towers.push(new Bullet_tower(0,0));
-				game.towers.push(new Zappy_tower(0,0));
 				game.towers.push(new Laser_tower(0,0));
+				game.tp.addTower(game.towers[game.towers.length-1]);
 			}
 			this.completed.push(Math.floor(16*Math.random())*32);
 		}

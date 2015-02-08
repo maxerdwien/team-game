@@ -14,8 +14,8 @@ var straightPipe = function(x, y, gx, gy, width, height, game)
 	this.dir = 0;
 	this.connected = false;
 	this.flowing = false;
-	this.timer = 11;
-	this.flowspeed = 11;
+	this.timer = 22;
+	this.flowspeed = 22;
 	this.full = false;
 }
 

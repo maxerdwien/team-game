@@ -16,7 +16,7 @@ var startPipe = function(width, height, game)
 	this.connected = true;
 	this.flowing = false;
 	this.full = false;
-	this.timer = 11;
+	this.timer = 22;
 }
 
 startPipe.prototype = {
@@ -54,7 +54,7 @@ startPipe.prototype = {
 			this.timer--;
 			if(this.timer <= 0)
 			{
-				this.timer = 11;
+				this.timer = 22;
 				if(this.spritex / 64 < 17)
 				{
 					this.spritex += 64;

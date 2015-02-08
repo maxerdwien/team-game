@@ -80,7 +80,7 @@ Game.prototype = {
 		{
 			this.cutscene.update();
 		}
-		else
+		else if (this.mode != "Mashing")
 		{
 			this.pipeDream.update();
 			this.mana.update(elapsedTime);
@@ -114,6 +114,10 @@ Game.prototype = {
 		{
 			this.cutscene.render(this.backBufferContext);
 		}
+		else if (this.mode == "Mashing")
+		{
+			this.masher.render(this.backBufferContext);
+		}
 		else
 		{	
 			this.backBufferContext.fillStyle="white";
@@ -135,8 +139,6 @@ Game.prototype = {
 			
 			this.pipeDream.render(this.backBufferContext);
 		}
-		
-		//this.masher.render(this.backBufferContext);
 		
 		// Flip buffers
 		self.screenContext.drawImage(self.backBuffer, 0, 0);

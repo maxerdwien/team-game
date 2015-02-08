@@ -18,6 +18,8 @@ var TD_level = function() {
 	
 	this.level_time = 0;
 	
+	this.music_counter = 0;
+	
 	this.width = 10;
 	this.height = 9;
 	if (this.width * this.height != this.data.length) {
@@ -54,6 +56,19 @@ var TD_level = function() {
 
 TD_level.prototype = {
 	update: function(elapsedTime) {
+		
+		if (this.music_counter == 0) 
+		{
+			this.music_counter++;
+			resources.td_start.play();
+		}
+		else if (this.music_counter == 1 && resources.td_start.ended)
+		{
+			this.music_counter++;
+			resources.td_music.play();
+		}
+		if (this.music_counter == 2 && resources.td_music.ended) resources.td_music.play();
+		
 		this.level_time += elapsedTime/1000;
 		if (typeof this.spawn_waves[this.spawn_index] != "undefined") {
 			if (this.level_time >= this.spawn_waves[this.spawn_index][0]) {

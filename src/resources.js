@@ -80,4 +80,12 @@ var Resources = function() {
 	
 	this.zap_fire = new Audio();
 	this.zap_fire.src = "sfx/131592__gowers__transformer-024-camera.wav";
+	
+	this.td_start = new Audio();
+	this.td_start.src = "sfx/131006__shot846__robot-letsrock-by-shot846.wav";
+	
+	//Music
+	
+	this.td_music = new Audio();
+	this.td_music.src = "music/48544__flick3r__rezzo-4.wav"
 }

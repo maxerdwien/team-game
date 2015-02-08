@@ -49,7 +49,7 @@ var Game = function (canvasId) {
 	this.mana = new Mana_pool();
 	
 	// add td stuff
-	this.level = new TD_level(4);
+	this.level = new TD_level(3);
 	
 	this.cd = new Collision_detector();
 	
@@ -83,7 +83,12 @@ Game.prototype = {
 		{
 			this.cutscene.update();
 		}
-		else if (this.mode == "Towers" && !this.level.done_spawning)
+		else if (this.mode == "Towers" && (this.level.done_spawning && this.baddies.length == 0))
+		{
+			this.mode = "Mashing";
+			console.log("here");
+		}
+		else if (this.mode == "Towers")
 		{
 			this.pipeDream.update();
 			this.mana.update(elapsedTime);
@@ -110,11 +115,6 @@ Game.prototype = {
 					i--;
 				}
 			}
-		}
-		else if (this.mode == "Towers" && this.level.done_spawning)
-		{
-			this.mode = "Mashing";
-			console.log("here");
 		}
 	},
 	

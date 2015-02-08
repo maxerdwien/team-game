@@ -107,7 +107,7 @@ var TD_level = function(level) {
 TD_level.prototype = {
 	update: function(elapsedTime) {
 		this.level_time += elapsedTime/1000;
-		if (typeof this.spawn_waves[this.spawn_index] != "undefined") {
+		if (this.spawn_waves[this.spawn_index] != undefined) {
 			if (this.level_time >= this.spawn_waves[this.spawn_index][0]) {
 				for (var i = 1; i < this.spawn_waves[this.spawn_index].length; i++) {
 					var newBaddie;
@@ -128,6 +128,8 @@ TD_level.prototype = {
 			}
 		} else {
 			this.done_spawning = true;
+			console.log(this.spawn_index);
+			
 		}
 	},
 	

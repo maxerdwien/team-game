@@ -52,11 +52,33 @@ Cutscene.prototype = {
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.prelevel1, 0, 0, 1280, 320, 0, 160, 1280, 320);
 				this.counter++;
-				if (this.counter >= 30) //change to 600 or maybe 500
+				if (this.counter >= 600) //change to 600 or maybe 500
 				{
 					this.counter = 0;
 					this.currentScene++;
-					game.mode = "Pipes";
+					game.mode = "Towers";
+				}
+				break;
+			case 5: context.fillStyle="black";
+				context.fillRect(0, 0, WIDTH, HEIGHT);
+				context.drawImage(resources.prelevel2, 0, 0, 1280, 320, 0, 160, 1280, 320);
+				this.counter++;
+				if (this.counter >= 600) //change to 600 or maybe 500
+				{
+					this.counter = 0;
+					this.currentScene++;
+					game.mode = "Towers";
+				}
+				break;
+			case 6: context.fillStyle="black";
+				context.fillRect(0, 0, WIDTH, HEIGHT);
+				context.drawImage(resources.prelevel3, 0, 0, 1280, 320, 0, 160, 1280, 320);
+				this.counter++;
+				if (this.counter >= 600) //change to 600 or maybe 500
+				{
+					this.counter = 0;
+					this.currentScene++;
+					game.mode = "Towers";
 				}
 				break;
 		}

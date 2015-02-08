@@ -103,6 +103,11 @@ Cutscene.prototype = {
 					game.mode = "Towers";
 				}
 				break;
+			
+			case 15: context.fillStyle="black";
+				context.fillRect(0, 0, WIDTH, HEIGHT);
+				context.drawImage(resources.game_over, 0, 0, 1280, 320, 0, 160, 1280, 320);
+				break;
 		}
 	},
 	

@@ -11,7 +11,7 @@ var Trojan = function(x, y, path) {
 	
 	this.dead = false;
 	
-	this.attack = 5;
+	this.attack = 4;
 	
 	this.right_foot = true;
 	

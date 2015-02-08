@@ -9,6 +9,9 @@ var PipeDream = function(game)
 		this.screenHeight = 576;
 		this.cellWidth = 64;
 		this.cellHeight = 64;
+		this.won = false;
+		this.stopTime = 0;
+		this.pause = false;
 }
 
 PipeDream.prototype = {
@@ -21,14 +24,34 @@ PipeDream.prototype = {
 			tile.render(context);
 		})
 		context.restore();
+		if(this.pause == true)
+		{
+			context.save();
+			context.fillStyle="rgba(0, 0, 0, 0.1)";
+			context.fillRect(0, 0, this.screenWidth, this.screenHeight);
+			context.restore();
+		}
 	},
 	
 	update: function()
 	{
-		this.pipeTiles.forEach( function(tile)
+		if(this.won == true)
 		{
-			tile.update();
-		});
+			this.init();
+			this.won = false;
+		}
+		else if(this.pause == false)
+		{
+			this.pipeTiles.forEach( function(tile)
+			{
+				tile.update();
+			});
+		}
+		else if(this.pause == true && game.gameTime - this.stopTime >= 5000)
+		{
+			this.pause = false;
+			this.init();
+		}
 	},
 	
 	checkPath: function()
@@ -38,6 +61,7 @@ PipeDream.prototype = {
 	
 	init: function()
 	{
+		this.pipeTiles.length = 0;
 		this.pipeTiles.push(new startPipe(this.cellWidth, this.cellHeight, game));
 		var pathLength = (Math.floor(Math.random() * 40) + 15) % 30;
 		var lastpt = { x: 0, y: 0 }
@@ -101,7 +125,6 @@ PipeDream.prototype = {
 				}
 			}
 		}
-		//this.update();
 	},
 	
 	determineTile: function(last, current, next)
@@ -178,5 +201,11 @@ PipeDream.prototype = {
 				this.pipeTiles[current.x + current.y * this.gridWidth].setDir(Math.floor(Math.random() * 4));
 			}
 		}
+	},
+	
+	gameOver: function()
+	{
+		this.pause = true;
+		this.stopTime = game.gameTime;
 	}
 }

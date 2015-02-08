@@ -11,7 +11,7 @@ var Trojan = function(x, y, path) {
 	
 	this.dead = false;
 	
-	this.attack = 5;
+	this.attack = 4;
 	
 	this.right_foot = true;
 	
@@ -76,6 +76,10 @@ Trojan.prototype.render = function(ctx) {
 	this.spritex = 64*this.damage_level + 384*this.right_foot;
 	if (this.walk_direction == 0 || this.walk_direction == 2) {
 		this.spritex += 768;
+	}
+	if (this.walk_direction == 2) {
+		ctx.translate(2*(this.x+32), 0);
+		ctx.scale(-1, 1);
 	}
 	ctx.drawImage(this.image, this.spritex, this.spritey, 64, 64,
 		this.x, this.y, 64, 64);

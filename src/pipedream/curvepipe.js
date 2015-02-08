@@ -192,7 +192,7 @@ curvePipe.prototype = {
 	
 	rotate: function()
 	{
-		this.dir++;
+		this.dir ++;
 		this.dir = this.dir % 4;
 		
 		if(this.dir == 0)
@@ -250,12 +250,12 @@ curvePipe.prototype = {
 		{
 			if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0 && game.pipeDream.pipeTiles[(this.source.y * 9) + this.source.x].connected == true)
 			{
-				this.flip = false;
 				this.connected = true;
 			}
 			else if(this.dest.x < game.pipeDream.gridWidth && this.dest.x >= 0 && this.dest.y < game.pipeDream.gridHeight && this.dest.y >= 0 && game.pipeDream.pipeTiles[(this.dest.y * 9) + this.dest.x].connected == true)
 			{
-				this.flip = true;
+				if(this.fip == false) this.flip = true;
+				else this.flip = false;
 				this.connected = true;
 				var hold = this.source;
 				this.source = this.dest;
@@ -265,13 +265,30 @@ curvePipe.prototype = {
 			{
 				if(callx == this.dest.x && cally == this.dest.y)
 				{
-					pathContinues = game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
-					if(this.full == true && pathContinues == true) game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].flowing = true;
+					if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0)
+					{
+						pathContinues = game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+					}
+					else pathContinues = false;
+					if(this.full == true)
+					{
+						if(pathContinues == true) game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].flowing = true;
+						else game.pipeDream.gameOver();
+					}
+					
 				}
 				else
 				{
-					pathContinues = game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
-					if(this.full == true && pathContinues == true) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].flowing = true;
+					if(this.dest.x < game.pipeDream.gridWidth && this.dest.x >= 0 && this.dest.y < game.pipeDream.gridHeight && this.dest.y >= 0)
+					{
+						pathContinues = game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+					}
+					else pathContinues = false;
+					if(this.full == true)
+					{
+						if(pathContinues == true) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].flowing = true;
+						else game.pipeDream.gameOver();
+					}
 				}
 				return true;
 			}

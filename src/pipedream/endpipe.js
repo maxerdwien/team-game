@@ -1,4 +1,4 @@
-var endPipe = function(x, y, gx, gy, width, height, game)
+var endPipe = function(x, y, gx, gy, width, height)
 {
 	this.x = x;
 	this.y = y;
@@ -13,7 +13,6 @@ var endPipe = function(x, y, gx, gy, width, height, game)
 	this.source = { x: this.gridx, y: this.gridy+1 };
 	this.width = width;
 	this.height = height;
-	this.game = game;
 	this.dir = 0;
 	this.connected = false;
 	this.flowing = false;

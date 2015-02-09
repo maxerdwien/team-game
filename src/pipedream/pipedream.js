@@ -1,7 +1,6 @@
-var PipeDream = function(game)
+var PipeDream = function()
 {
 		this.pDream = this;
-		this.game = game;
 		this.pipeTiles = [];
 		this.gridWidth = 9;
 		this.gridHeight = 9;

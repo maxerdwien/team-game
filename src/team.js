@@ -173,16 +173,11 @@ Game.prototype = {
 	},
 	
 	mousedown: function(e) {
-		var mouseHitbox = {
-			type: "circle",
-			x: this.mousex,
-			y: this.mousey,
-			r: 0
-		};
-		if(mouseHitbox.x < this.pipeDream.screenWidth && mouseHitbox.y < this.pipeDream.screenHeight)
+		
+		if(this.mousex < this.pipeDream.screenWidth && this.mousey < this.pipeDream.screenHeight)
 		{
-			var grX = Math.floor(mouseHitbox.x / this.pipeDream.cellWidth);
-			var grY = Math.floor(mouseHitbox.y / this.pipeDream.cellHeight);
+			var grX = Math.floor(this.mousex / this.pipeDream.cellWidth);
+			var grY = Math.floor(this.mousey / this.pipeDream.cellHeight);
 			
 			if(this.pipeDream.pause == false)
 			{
@@ -192,6 +187,12 @@ Game.prototype = {
 			}
 		}
 		
+		var mouseHitbox = {
+			type: "circle",
+			x: this.mousex,
+			y: this.mousey,
+			r: 0
+		};
 		for (var i = 0; i < this.towers.length; i++) {
 			if (this.towers[i].mode == "ready" &&
 				this.cd.detect(mouseHitbox, this.towers[i].getHitbox())) {

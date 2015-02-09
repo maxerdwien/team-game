@@ -1,4 +1,0 @@
-var straightPipe = function(x, y, gx, gy, width, height, game)
-{
-	this.prototype = new pipeTile(x, y, gx, gy, width, height, game);
-}

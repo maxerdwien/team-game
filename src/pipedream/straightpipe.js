@@ -1,4 +1,4 @@
-var straightPipe = function(x, y, gx, gy, width, height, game)
+var straightPipe = function(x, y, gx, gy, width, height)
 {
 	this.x = x;
 	this.y = y;
@@ -10,7 +10,6 @@ var straightPipe = function(x, y, gx, gy, width, height, game)
 	this.dest = { x: this.gridx, y: this.gridy-1 };
 	this.width = width;
 	this.height = height;
-	this.game = game;
 	this.dir = 0;
 	this.connected = false;
 	this.flowing = false;
@@ -183,12 +182,12 @@ straightPipe.prototype = {
 				{
 					if(this.source.x < game.pipeDream.gridWidth && this.source.x >= 0 && this.source.y < game.pipeDream.gridHeight && this.source.y >= 0)
 					{
-						pathContinues = game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+						pathContinues = game.pipeDream.pipeTiles[this.source.x + this.source.y * game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
 					}
 					else pathContinues = false;
 					if(this.full == true)
 					{
-						if(pathContinues == true) game.pipeDream.pipeTiles[this.source.x + this.source.y * this.game.pipeDream.gridWidth].flowing = true;
+						if(pathContinues == true) game.pipeDream.pipeTiles[this.source.x + this.source.y * game.pipeDream.gridWidth].flowing = true;
 						else game.pipeDream.gameOver();
 					}
 				}
@@ -196,12 +195,12 @@ straightPipe.prototype = {
 				{
 					if(this.dest.x < game.pipeDream.gridWidth && this.dest.x >= 0 && this.dest.y < game.pipeDream.gridHeight && this.dest.y >= 0)
 					{
-						pathContinues = game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+						pathContinues = game.pipeDream.pipeTiles[this.dest.x + this.dest.y * game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
 					}
 					else pathContinues = false;
 					if(this.full == true)
 					{
-						if(pathContinues == true) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].flowing = true;
+						if(pathContinues == true) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * game.pipeDream.gridWidth].flowing = true;
 						else game.pipeDream.gameOver();
 					}
 				}

@@ -196,6 +196,6 @@ Masher.prototype = {
 			}
 			this.completed.push(Math.floor(16*Math.random())*32);
 		}
-		else if (game.mode == "Cutscene") game.cutscene.counter = 699;
+		else if (game.mode == "Cutscene") game.cutscene.skip = true;
 	}
 }

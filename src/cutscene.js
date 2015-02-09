@@ -1,8 +1,7 @@
 var Cutscene = function(game)
 {
 	this.game = game;
-	this.currentScene = 0;
-	this.counter = 0;
+	this.skip = false;
 }
 
 Cutscene.prototype = {
@@ -14,10 +13,9 @@ Cutscene.prototype = {
 				context.fillStyle="black";
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.screen1, 0, 0, 1280, 320, 0, 160, 1280, 320);
-				this.counter++;
-				if (this.counter >= 700) //change to 700
+				if (this.skip)
 				{
-					this.counter = 0;
+					this.skip = false;
 					this.currentScene++;
 				}
 				break;
@@ -25,10 +23,9 @@ Cutscene.prototype = {
 				context.fillStyle="black";
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.screen2, 0, 0, 1280, 320, 0, 160, 1280, 320);
-				this.counter++;
-				if (this.counter >= 700) //change to 700
+				if (this.skip)
 				{
-					this.counter = 0;
+					this.skip = false;
 					this.currentScene++;
 				}
 				break;
@@ -36,25 +33,22 @@ Cutscene.prototype = {
 				context.fillStyle="black";
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.screen3, 0, 0, 1280, 320, 0, 160, 1280, 320);
-				this.counter++;
-				if (this.counter >= 700) //change to 700
+				if (this.skip)
 				{
-					this.counter = 0;
+					this.skip = false;
 					this.currentScene++;
 				}
 				break;
 			case 3:
-				this.counter++;
 				game.mode = "Mashing";
 				this.currentScene++;
 				break;
 			case 4: context.fillStyle="black";
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.prelevel1, 0, 0, 1280, 320, 0, 160, 1280, 320);
-				this.counter++;
-				if (this.counter >= 300) //change to 300
+				if (this.skip)
 				{
-					this.counter = 0;
+					this.skip = false;
 					this.currentScene++;
 					game.mode = "Towers";
 				}
@@ -62,10 +56,9 @@ Cutscene.prototype = {
 			case 5: context.fillStyle="black";
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.prelevel2, 0, 0, 1280, 320, 0, 160, 1280, 320);
-				this.counter++;
-				if (this.counter >= 300) //change to 300
+				if (this.skip)
 				{
-					this.counter = 0;
+					this.skip = false;
 					this.currentScene++;
 					game.mode = "Towers";
 				}
@@ -73,10 +66,9 @@ Cutscene.prototype = {
 			case 6: context.fillStyle="black";
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.prelevel3, 0, 0, 1280, 320, 0, 160, 1280, 320);
-				this.counter++;
-				if (this.counter >= 300) //change to 300
+				if (this.skip)
 				{
-					this.counter = 0;
+					this.skip = false;
 					this.currentScene++;
 					game.mode = "Towers";
 				}
@@ -84,10 +76,9 @@ Cutscene.prototype = {
 			case 7: context.fillStyle="black";
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.prelevel4, 0, 0, 1280, 320, 0, 160, 1280, 320);
-				this.counter++;
-				if (this.counter >= 300) //change to 300
+				if (this.skip)
 				{
-					this.counter = 0;
+					this.skip = false;
 					this.currentScene++;
 					game.mode = "Towers";
 				}
@@ -95,10 +86,9 @@ Cutscene.prototype = {
 			case 8: context.fillStyle="black";
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.prelevel5, 0, 0, 1280, 320, 0, 160, 1280, 320);
-				this.counter++;
-				if (this.counter >= 300) //change to 300
+				if (this.skip)
 				{
-					this.counter = 0;
+					this.skip = false;
 					this.currentScene++;
 					game.mode = "Towers";
 				}
@@ -106,12 +96,6 @@ Cutscene.prototype = {
 			case 9: context.fillStyle="black";
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.end, 0, 0, 1280, 320, 0, 160, 1280, 320);
-				this.counter++;
-				if (this.counter >= 300) //change to 300
-				{
-					this.counter = 0;
-					this.currentScene++;
-				}
 				break;
 			
 			case 15: context.fillStyle="black";

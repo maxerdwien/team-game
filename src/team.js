@@ -182,6 +182,8 @@ Game.prototype = {
 			if(this.pipeDream.pause == false)
 			{
 				this.pipeDream.pipeTiles[grX + grY * this.pipeDream.gridWidth].rotate();
+				
+				// begin flow in start pipe
 				this.pipeDream.pipeTiles[0].flowing = true;
 				this.pipeDream.checkPath();
 			}

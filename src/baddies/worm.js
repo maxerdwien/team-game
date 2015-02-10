@@ -24,7 +24,7 @@ var Worm = function(x, y, path) {
 	this.millis_saved = 0;
 	this.pixels_traveled = 0;
 	
-	this.max_health = 75;
+	this.max_health = 60;
 	this.health = this.max_health;
 	
 	// milliseconds

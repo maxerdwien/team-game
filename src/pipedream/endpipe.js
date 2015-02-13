@@ -26,56 +26,56 @@ endPipe.prototype = {
 		{
 			context.drawImage(resources.pipes_sprite_sheet,
 							this.spritex,
-							this.spritey,
+							this.spritey + (this.height/2),
 							this.width,
 							this.height/2,
 							this.x,
-							this.y,
+							this.y + (this.height/2),
 							this.width,
 							this.height/2)
 		}
 		else if(this.dir == 1)
 		{
 			context.translate(this.x, this.y);
-			context.rotate(-Math.PI/2);
-			context.translate(-this.width, 0);
+			context.rotate(Math.PI/2);
+			context.translate(0, -this.height);
 			context.drawImage(resources.pipes_sprite_sheet,
 							this.spritex,
-							this.spritey,
+							this.spritey + (this.height/2),
 							this.width,
 							this.height/2,
 							0,
-							0,
+							0 + (this.height/2),
 							this.width,
 							this.height/2)
 		}
 		else if(this.dir == 2)
 		{
 			context.translate(this.x, this.y);
-			context.rotate(Math.PI/2);
-			context.translate(0, -this.height);
+			context.rotate(Math.PI);
+			context.translate(-this.width, -this.height);
 			context.drawImage(resources.pipes_sprite_sheet,
 							this.spritex,
-							this.spritey,
+							this.spritey + (this.height/2),
 							this.width,
 							this.height/2,
 							0,
-							0,
+							0 + (this.height/2),
 							this.width,
 							this.height/2)
 		}
 		else if(this.dir == 3)
 		{
 			context.translate(this.x, this.y);
-			context.rotate(Math.PI);
-			context.translate(-this.width, -this.height);
+			context.rotate(-Math.PI/2);
+			context.translate(-this.width, 0);
 			context.drawImage(resources.pipes_sprite_sheet,
 							this.spritex,
-							this.spritey,
+							this.spritey + (this.height/2),
 							this.width,
 							this.height/2,
 							0,
-							0,
+							0 + (this.height/2),
 							this.width,
 							this.height/2)
 		}
@@ -96,32 +96,28 @@ endPipe.prototype = {
 	
 	rotate: function()
 	{
-		/*
-		this.dir++;
-		this.dir = this.dir % 4;
-		
-		if(this.dir == 0)
+		if(this.connected == false)
 		{
-			this.source = { x: this.x, y: this.y+1 };
-			this.dest = { x: this.x, y: this.y-1 };
+			this.dir++;
+			this.dir = this.dir % 4;
+			
+			if(this.dir == 0)
+			{
+				this.source = { x: this.gridx, y: this.gridy+1 };
+			}
+			else if(this.dir == 1)
+			{
+				this.source = { x: this.gridx-1, y: this.gridy };
+			}
+			else if(this.dir == 2)
+			{
+				this.source = { x: this.gridx, y: this.gridy-1 };
+			}
+			else if(this.dir == 3)
+			{
+				this.source = { x: this.gridx+1, y: this.gridy };
+			}
 		}
-		else if(this.dir == 1)
-		{
-			this.source = { x: this.x+1, y: this.y };
-			this.dest = { x: this.x-1, y: this.y };
-		}
-		else if(this.dir == 2)
-		{
-			this.source = { x: this.x-1, y: this.y };
-			this.dest = { x: this.x+1, y: this.y };
-		}
-		else if(this.dir == 3)
-		{
-			this.source = { x: this.x, y: this.y-1 };
-			this.dest = { x: this.x, y: this.y+1 };
-		}
-		this.checkPath();
-		*/
 	},
 	
 	setDir: function(set)
@@ -131,7 +127,7 @@ endPipe.prototype = {
 		
 		if(this.dir == 0)
 		{
-			this.source = { x: this.gridx, y: this.gridy-1 };
+			this.source = { x: this.gridx, y: this.gridy+1 };
 		}
 		else if(this.dir == 1)
 		{
@@ -139,11 +135,11 @@ endPipe.prototype = {
 		}
 		else if(this.dir == 2)
 		{
-			this.source = { x: this.gridx+1, y: this.gridy };
+			this.source = { x: this.gridx, y: this.gridy-1 };
 		}
 		else if(this.dir == 3)
 		{
-			this.source = { x: this.gridx, y: this.gridy+1 };
+			this.source = { x: this.gridx+1, y: this.gridy };
 		}
 	},
 	

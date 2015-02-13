@@ -109,9 +109,9 @@ PipeDream.prototype = {
 		// cap off the path with the tower pipe
 		this.pipeTiles[curpt.x + curpt.y * this.gridWidth] = new endPipe(curpt.x * this.cellWidth, curpt.y * this.cellHeight, curpt.x, curpt.y, this.cellWidth, this.cellHeight, game);
 		if(lastpt.x < curpt.x)  this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(1);
-		else if(lastpt.x > curpt.x) this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(2);
-		else if(lastpt.y < curpt.y) this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(0);
-		else this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(3);
+		else if(lastpt.x > curpt.x) this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(3);
+		else if(lastpt.y < curpt.y) this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(2);
+		else this.pipeTiles[curpt.x + curpt.y * this.gridWidth].setDir(0);
 		
 		// fill in the rest of the map randomly
 		var numEnds = 3;

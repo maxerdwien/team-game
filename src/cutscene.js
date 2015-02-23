@@ -1,10 +1,7 @@
 var Cutscene = function(game)
 {
 	this.game = game;
-<<<<<<< HEAD
-=======
 	this.currentScene = 0;
->>>>>>> origin/master
 	this.skip = false;
 }
 
@@ -100,11 +97,11 @@ Cutscene.prototype = {
 			case 9: context.fillStyle="black";
 				context.fillRect(0, 0, WIDTH, HEIGHT);
 				context.drawImage(resources.end, 0, 0, 1280, 320, 0, 160, 1280, 320);
-				if (this.skip)
+				/*if (this.skip)
 				{
 					this.skip = false;
 					this.currentScene++;
-				};
+				};*/
 				break;
 			
 			case 15: context.fillStyle="black";

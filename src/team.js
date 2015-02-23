@@ -173,25 +173,28 @@ Game.prototype = {
 	},
 	
 	mousedown: function(e) {
+		
+		if(this.mousex < this.pipeDream.screenWidth && this.mousey < this.pipeDream.screenHeight)
+		{
+			var grX = Math.floor(this.mousex / this.pipeDream.cellWidth);
+			var grY = Math.floor(this.mousey / this.pipeDream.cellHeight);
+			
+			if(this.pipeDream.pause == false)
+			{
+				this.pipeDream.pipeTiles[grX + grY * this.pipeDream.gridWidth].rotate();
+				
+				// begin flow in start pipe
+				this.pipeDream.pipeTiles[0].flowing = true;
+				this.pipeDream.checkPath();
+			}
+		}
+		
 		var mouseHitbox = {
 			type: "circle",
 			x: this.mousex,
 			y: this.mousey,
 			r: 0
 		};
-		if(mouseHitbox.x < this.pipeDream.screenWidth && mouseHitbox.y < this.pipeDream.screenHeight)
-		{
-			var grX = Math.floor(mouseHitbox.x / this.pipeDream.cellWidth);
-			var grY = Math.floor(mouseHitbox.y / this.pipeDream.cellHeight);
-			
-			if(this.pipeDream.pause == false)
-			{
-				this.pipeDream.pipeTiles[grX + grY * this.pipeDream.gridWidth].rotate();
-				this.pipeDream.pipeTiles[0].flowing = true;
-				this.pipeDream.checkPath();
-			}
-		}
-		
 		for (var i = 0; i < this.towers.length; i++) {
 			if (this.towers[i].mode == "ready" &&
 				this.cd.detect(mouseHitbox, this.towers[i].getHitbox())) {

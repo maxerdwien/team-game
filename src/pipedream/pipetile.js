@@ -1,4 +1,4 @@
-var pipeTile = function(x, y, gx, gy, width, height, game)
+var pipeTile = function(x, y, gx, gy, width, height)
 {
 	this.x = x;
 	this.y = y;
@@ -8,7 +8,6 @@ var pipeTile = function(x, y, gx, gy, width, height, game)
 	this.spritey = 2;
 	this.width = width;
 	this.height = height;
-	this.game = game;
 }
 
 pipeTile.prototype = {

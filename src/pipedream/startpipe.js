@@ -1,4 +1,4 @@
-var startPipe = function(width, height, game)
+var startPipe = function(width, height)
 {
 	this.x = 0;
 	this.y = 0;
@@ -11,12 +11,11 @@ var startPipe = function(width, height, game)
 	this.dest = { x: this.gridx, y: this.gridy+1 };
 	this.width = width;
 	this.height = height;
-	this.game = game;
 	this.dir = 0;
 	this.connected = true;
 	this.flowing = false;
 	this.full = false;
-	this.timer = 22;
+	this.timer = 35;
 }
 
 startPipe.prototype = {
@@ -54,7 +53,7 @@ startPipe.prototype = {
 			this.timer--;
 			if(this.timer <= 0)
 			{
-				this.timer = 22;
+				this.timer = 35;
 				if(this.spritex / 64 < 17)
 				{
 					this.spritex += 64;
@@ -67,8 +66,8 @@ startPipe.prototype = {
 			}
 			if(this.full == true)
 			{
-				var pathContinues = game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
-				if(pathContinues) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * this.game.pipeDream.gridWidth].flowing = true;
+				var pathContinues = game.pipeDream.pipeTiles[this.dest.x + this.dest.y * game.pipeDream.gridWidth].checkPath(this.gridx, this.gridy);
+				if(pathContinues) game.pipeDream.pipeTiles[this.dest.x + this.dest.y * game.pipeDream.gridWidth].flowing = true;
 				else game.pipeDream.gameOver();
 				this.full = false;
 			}

@@ -1,4 +1,4 @@
-var crossPipe = function(x, y, gx, gy, width, height, game)
+var crossPipe = function(x, y, gx, gy, width, height)
 {
 	this.x = x;
 	this.y = y;
@@ -13,7 +13,6 @@ var crossPipe = function(x, y, gx, gy, width, height, game)
 	this.pipe2.rotate();
 	this.width = width;
 	this.height = height;
-	this.game = game;
 	this.dir = 0;
 	this.connected = false;
 	this.flip = false;

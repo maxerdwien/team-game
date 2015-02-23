@@ -96,7 +96,13 @@ Masher.prototype = {
 				context.restore();
 			}
 		}
+		
+		if (this.timer == 10000) this.timer = this.elapsedTime * 200;////////////////////////////////////////////////////////////////////////////////
+		else if ((this.timer - this.elapsedTime) > 0) this.timer -= this.elapsedTime;
+		
+		//if detected, play alarm
 		if (this.detected) resources.alarm.play();
+		//if detected with an amount of time left or if the alert is displayed
 		if (((this.detected && this.counter == 180) || this.alert) && this.secondCounter > 0 && this.counter > 0)
 		{
 			context.fillStyle="black";
@@ -107,17 +113,20 @@ Masher.prototype = {
 			this.secondCounter--;
 			if (this.counter == 0) this.alert = false;
 		}
+		//if no progress has been made, display start message
 		if (this.progress == 0) 
 		{
 			context.fillStyle="black";
 			context.fillRect(480, 192, 480, 320);
 			context.drawImage(resources.masher_start, 0, 0, 480, 320, 480, 192, 480, 320);
 		}
+		// if detected
 		else if (this.detected)
 		{
 			this.counter++;
 			this.secondCounter--;
 		}
+		//these deal with rendering the hack bar
 		if (this.secondCounter >= 45) context.drawImage(resources.hack_bar, 0, 576);
 		if (this.secondCounter >= 90) context.drawImage(resources.hack_bar, 64, 576);
 		if (this.secondCounter >= 135) context.drawImage(resources.hack_bar, 128, 576);
@@ -149,6 +158,7 @@ Masher.prototype = {
 			this.counter++;
 			context.drawImage(resources.masher_game_over, 0, 0, 320, 320, 480, 192, 320, 320);
 		}
+		//ends the game
 		else if (this.secondCounter <= 0)
 		{
 			game.mode = "Cutscene";

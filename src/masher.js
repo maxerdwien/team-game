@@ -10,7 +10,22 @@ var Masher = function(game)
 	this.alert = false;
 	this.counter = 320
 	this.secondCounter = 900;
+	this.timer = 10000;
 	window.onkeyup = function (e) { self.keyUp(e); };
+	/*
+	if (this.timer == 10000) this.timer = this.elapsedTime * 200;
+			else if ((this.timer - this.elapsedTime) > 0) this.timer -= this.elapsedTime;
+			else
+			{	
+				this.levelNumber++;
+				this.tp.pool = [];
+				this.timer = 10000;
+				this.mode = "Mashing";
+				this.mana = new Mana_pool();
+				this.towers = [];
+				this.level = new TD_level(this.levelNumber);
+			}
+	*/		
 }
 
 Masher.prototype = {
